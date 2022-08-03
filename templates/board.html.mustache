@@ -1,0 +1,85 @@
+{{#threads}}
+	<div class="mb-2 columns has-text-white-bis">
+		{{^MediaTimestampIsNil}}
+			<div class="column is-narrow">
+				{{#MediaAvailable}}
+					<a 
+						href="{{conf.ImagesUrl}}/{{DerefMediaInternalHash}}"
+						target="_blank"
+					>
+						<img
+							src="{{conf.ThumbnailsUrl}}/{{DerefThumbnailInternalHash}}"
+							alt="Image not available"
+							style="height: {{DerefThumbnailHeight}}px; width: {{DerefThumbnailWidth}}px;"
+						/>
+					</a>
+				{{/MediaAvailable}}
+				{{^MediaAvailable}}
+					{{#ThumbnailAvailable}}
+						<img
+							src="{{conf.ThumbnailsUrl}}/{{DerefThumbnailInternalHash}}"
+							alt="Image not available"
+							style="height: {{DerefThumbnailHeight}}px; width: {{DerefThumbnailWidth}}px;"
+							title="Full image not available"
+						/>
+					{{/ThumbnailAvailable}}
+				{{/MediaAvailable}}
+				<p class="has-text-centered">
+					<small>{{DerefMediaWidth}}x{{DerefMediaHeight}}</small>
+				</p>
+				<p class="has-text-centered">
+					<small>{{DerefMediaFileNameShort}}.{{DerefMediaExtension}}</small>
+				</p>
+			</div>
+		{{/MediaTimestampIsNil}}
+		<div class="column">
+			<p>
+				{{#Deleted}}
+					<span style="color: red">DELETED</span>
+				{{/Deleted}}
+				{{^SubjectIsNil}}
+					<span style="color: BlueViolet">{{{DerefSubject}}}</span>
+				{{/SubjectIsNil}}
+				<strong class="has-text-white">{{FormatName}}</strong>
+				<span>
+					{{FormatTime}}
+					<a href="/{{board}}/thread/{{PostNumber}}">No. {{PostNumber}}</a>
+				</span>
+			</p>
+			{{^CommentIsNil}}
+				<p>{{{DerefComment}}}</p>
+			{{/CommentIsNil}}
+		</div>
+	</div>
+{{/threads}}
+<nav class="pagination" role="navigation" aria-label="pagination">
+	{{#rkeyset}}
+		<a
+			class="pagination-previous has-text-white-bis"
+			style="background-color: DarkViolet; border: 0px;"
+			href="/{{board}}?rkeyset={{rkeyset}}"
+		>
+			Previous page
+		</a>
+	{{/rkeyset}}
+	{{^rkeyset}}
+		<button class="pagination-previous" disabled>
+			Previous page
+		</button>
+	{{/rkeyset}}
+
+	{{#keyset}}
+		<a
+			class="pagination-next has-text-white-bis"
+			style="background-color: DarkViolet; border: 0px;"
+			href="/{{board}}?keyset={{keyset}}"
+		>
+			Next page
+		</a>
+	{{/keyset}}
+	{{^keyset}}
+		<button class="pagination-next" disabled>
+			Next page
+		</button>
+	{{/keyset}}
+</nav>
