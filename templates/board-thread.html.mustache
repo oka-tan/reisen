@@ -1,5 +1,11 @@
 {{#op}}
-	<div class="mb-2 columns has-text-white-bis" id="p{{PostNumber}}">
+	<div
+		class="reisen-post mb-2 columns has-text-white-bis"
+		id="p{{PostNumber}}"
+		{{#OekakiAvailable}}
+			data-oekaki-internal-hash="{{DerefOekakiInternalHash}}"
+		{{/OekakiAvailable}}
+	>
 		{{^MediaTimestampIsNil}}
 			<div class="column is-narrow">
 				{{#MediaAvailable}}
@@ -53,7 +59,13 @@
 	</div>
 {{/op}}
 {{#thread}}
-	<div class="mb-2 columns has-text-white-bis" id="p{{PostNumber}}">
+	<div
+		class="reisen-post mb-2 columns has-text-white-bis"
+		id="p{{PostNumber}}"
+		{{#OekakiAvailable}}
+			data-oekaki-internal-hash="{{DerefOekakiInternalHash}}"
+		{{/OekakiAvailable}}
+	>
 		{{^MediaTimestampIsNil}}
 			<div class="column is-narrow">
 				{{#MediaAvailable}}

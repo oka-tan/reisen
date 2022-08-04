@@ -4,6 +4,7 @@
 		<meta charset="utf-8"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1"/>
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css"/>
+		<link rel="stylesheet" href="{{conf.TegakiCssUrl}}"/>
 		<link rel="icon" href="{{conf.FaviconUrl}}"/>
 		<title>
 			Eientei Archive
@@ -17,7 +18,7 @@
 			}
 		</style>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js?config=TeX-AMS_HTML-full"></script>
-		<script src="{{conf.JsUrl}}"></script>
+		<script src="{{conf.TegakiJsUrl}}"></script>
 	</head>
 	<body>
 		<nav class="navbar is-black">
@@ -69,5 +70,6 @@
 				{{{content}}}
 			</div>
 		</section>
+		<script src="{{conf.JsUrl}}"></script>
 	</body>
 </html>

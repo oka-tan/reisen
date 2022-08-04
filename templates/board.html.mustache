@@ -1,5 +1,11 @@
 {{#threads}}
-	<div class="mb-2 columns has-text-white-bis">
+	<div 
+		id="#p{{PostNumber}}"
+		{{#OekakiAvailable}}
+			data-oekaki-internal-hash="{{DerefOekakiInternalHash}}"
+		{{/OekakiAvailable}}
+		class="mb-2 columns has-text-white-bis"
+	>
 		{{^MediaTimestampIsNil}}
 			<div class="column is-narrow">
 				{{#MediaAvailable}}

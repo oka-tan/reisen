@@ -36,6 +36,8 @@ type TemplateConfig struct {
 	FaviconUrl    string
 	CssUrl        string
 	JsUrl         string
+	TegakiJsUrl   string
+	TegakiCssUrl  string
 }
 
 func LoadConfig() Config {

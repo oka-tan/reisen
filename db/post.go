@@ -51,6 +51,7 @@ type Post struct {
 	Posters               *int16     `bun:"posters"`
 	Replies               *int16     `bun:"replies"`
 	Since4Pass            *int16     `bun:"since4pass"`
+	OekakiInternalHash    *[]byte    `bun:"oekaki_internal_hash"`
 }
 
 func (p *Post) FormatName() string {
@@ -152,4 +153,12 @@ func (p *Post) MediaAvailable() bool {
 
 func (p *Post) ThumbnailAvailable() bool {
 	return p.ThumbnailInternalHash != nil
+}
+
+func (p *Post) OekakiAvailable() bool {
+	return p.OekakiInternalHash != nil
+}
+
+func (p *Post) DerefOekakiInternalHash() string {
+	return base64.URLEncoding.EncodeToString(*(p.OekakiInternalHash))
 }
