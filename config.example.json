@@ -20,6 +20,8 @@
 		"ThumbnailsUrl": "http://s3.localhost/koiwai",
 		"FaviconUrl": "http://reisen.localhost/favicon.ico",
 		"JsUrl": "http://reisen.localhost/static/reisen.js",
-		"CssUrl": "http://reisen.localhost/static/reisen.css"
+		"TegakiJsUrl": "http://reisen.localhost/static/tegaki.min.js",
+		"CssUrl": "http://reisen.localhost/static/reisen.css",
+		"TegakiCssUrl": "http://reisen.localhost/static/tegaki.css"
 	}
 }
