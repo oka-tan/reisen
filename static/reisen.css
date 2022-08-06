@@ -7,3 +7,15 @@
 .quotelink:hover{
 	color: #7c3aed;
 }
+table.exif {
+	color: #e2e8f0;
+}
+table.exif td{
+	color: #e2e8f0;
+}
+a[href^="javascript:"]{
+	color: #8b5cf6;
+}
+a[href^="javascript:"]:hover{
+	color: #7c3aed;
+}

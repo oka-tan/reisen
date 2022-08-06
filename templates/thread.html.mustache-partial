@@ -3,10 +3,10 @@
 	{{#OekakiAvailable}}
 		data-oekaki-internal-hash="{{DerefOekakiInternalHash}}"
 	{{/OekakiAvailable}}
-	class="reisen-post mb-4 flex flex-col md:flex-row gap-5"
+	class="reisen-post reisen-thread mb-4 flex flex-col md:flex-row gap-5"
 >
 	{{^MediaTimestampIsNil}}
-		<div>
+		<div class="flex-none">
 			{{#MediaAvailable}}
 				<a 
 					href="{{conf.ImagesUrl}}/{{DerefMediaInternalHash}}"
@@ -58,9 +58,8 @@
 				No. {{PostNumber}}
 			</a>
 		</p>
-		<div class="flex gap-2" id="quoteLinks{{PostNumber}}"></div>
 		{{^CommentIsNil}}
-			<p class="text-slate-200">{{{DerefComment}}}</p>
+			<p class="text-slate-200 mt-3">{{{DerefComment}}}</p>
 		{{/CommentIsNil}}
 	</div>
 </div>

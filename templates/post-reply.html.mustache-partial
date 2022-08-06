@@ -3,10 +3,10 @@
 	{{#OekakiAvailable}}
 		data-oekaki-internal-hash="{{DerefOekakiInternalHash}}"
 	{{/OekakiAvailable}}
-	class="reisen-post mb-4 flex flex-col md:flex-row gap-5 bg-middle-zinc px-3 py-3 border border-zinc-900"
+	class="reisen-post reisen-post-reply mb-4 flex flex-col md:flex-row gap-5 bg-middle-zinc px-4 py-4 border border-zinc-900 target:border-2 target:border-violet-500"
 >
 	{{^MediaTimestampIsNil}}
-		<div>
+		<div class="flex-none">
 			{{#MediaAvailable}}
 				<a 
 					href="{{conf.ImagesUrl}}/{{DerefMediaInternalHash}}"
@@ -53,9 +53,9 @@
 				No. {{PostNumber}}
 			</a>
 		</p>
-		<div class="flex gap-2" id="quoteLinks{{PostNumber}}"></div>
+		<div class="flex flex-wrap gap-2" id="quoteLinks{{PostNumber}}"></div>
 		{{^CommentIsNil}}
-			<p class="text-slate-100">{{{DerefComment}}}</p>
+			<p class="text-slate-100 mt-3">{{{DerefComment}}}</p>
 		{{/CommentIsNil}}
 	</div>
 </div>

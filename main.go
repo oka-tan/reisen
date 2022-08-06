@@ -46,6 +46,7 @@ func main() {
 	e.GET("/:board", handlers.Board(pg, conf))
 	e.GET("/:board/thread/:thread_number", handlers.BoardThread(pg, conf))
 	e.GET("/:board/search", handlers.BoardSearch(pg, lnxService, conf))
+	e.GET("/:board/post/:post_number", handlers.BoardPost(pg, conf))
 
 	if conf.Production {
 		e.AutoTLSManager.HostPolicy = autocert.HostWhitelist(conf.Hosts...)

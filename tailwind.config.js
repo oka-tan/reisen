@@ -1,6 +1,6 @@
 module.exports = {
 	content: ['./templates/*.html.mustache', './templates/*.html.mustache-partial'],
-	safelist: ['text-xs'],
+	safelist: ['text-xs', 'hidden'],
 	theme: {
 		extend: {
 			screens: {
