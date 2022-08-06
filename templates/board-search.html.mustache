@@ -1,83 +1,26 @@
-<h1 class="title has-text-white-bis">
+<h1 class="text-slate-200 text-3xl mb-4">
 	{{#countMoreThanOne}}
-		{{count}} Results found
+		{{count}} results found
 	{{/countMoreThanOne}}
 	{{^countMoreThanOne}}
-		1 Result found
+		A single result found
 	{{/countMoreThanOne}}
 </h1>
 
 {{#posts}}
-	<div
-		id="#p{{PostNumber}}"
-		{{#OekakiAvailable}}
-			data-oekaki-internal-hash="{{DerefOekakiInternalHash}}"
-		{{/OekakiAvailable}}
-		class="mb-2 columns has-text-white-bis"
-	>
-		{{^MediaTimestampIsNil}}
-			<div class="column is-narrow">
-				{{#MediaAvailable}}
-					<a 
-						href="{{conf.ImagesUrl}}/{{DerefMediaInternalHash}}"
-						target="_blank"
-					>
-						<img
-							src="{{conf.ThumbnailsUrl}}/{{DerefThumbnailInternalHash}}"
-							alt="Image not available"
-							style="height: {{DerefTnH}}px; width: {{DerefTnW}}px;"
-						/>
-					</a>
-				{{/MediaAvailable}}
-				{{^MediaAvailable}}
-					{{#ThumbnailAvailable}}
-						<img
-							src="{{conf.ThumbnailsUrl}}/{{DerefThumbnailInternalHash}}"
-							alt="Image not available"
-							style="height: {{DerefTnH}}px; width: {{DerefTnW}}px;"
-							title="Full image not available"
-						/>
-					{{/ThumbnailAvailable}}
-				{{/MediaAvailable}}
-				<p class="has-text-centered">
-					<small>{{DerefW}}x{{DerefH}}</small>
-				</p>
-				<p class="has-text-centered">
-					<small>{{DerefMediaFileNameShort}}.{{DerefMediaExtension}}</small>
-				</p>
-			</div>
-		{{/MediaTimestampIsNil}}
-		<div class="column">
-			<p>
-				{{#Deleted}}
-					<span style="color: red">DELETED</span>
-				{{/Deleted}}
-				{{^SubjectIsNil}}
-					<span style="color: BlueViolet">{{{DerefSubject}}}</span>
-				{{/SubjectIsNil}}
-				<strong class="has-text-white">{{FormatName}}</strong>
-				<span>
-					{{FormatTime}}
-					<a href="/{{board}}/thread/{{ThreadNumber}}#p{{PostNumber}}">No. {{ThreadNumber}}</a>
-				</span>
-			</p>
-			{{^CommentIsNil}}
-				<p>{{{DerefComment}}}</p>
-			{{/CommentIsNil}}
-		</div>
-	</div>
+	{{>post-ambiguous}}
 {{/posts}}
+
 <form action="/{{board}}/search" method="get">
 	<input
 		type="hidden"
 		name="search"
 		value="{{search}}"
 	/>
-	<nav class="pagination" role="navigation" aria-label="pagination">
+	<div class="flex justify-between">
 		{{#offset}}
 			<button
-				class="pagination-previous has-text-white-bis"
-				style="background-color: DarkViolet; border: 0px;"
+				class="bg-violet-500 hover:bg-violet-600 px-5 py-3 rounded text-slate-200"
 				name="offset"
 				value="{{previousPageOffset}}"
 			>
@@ -85,15 +28,17 @@
 			</button>
 		{{/offset}}
 		{{^offset}}
-			<button class="pagination-previous" disabled>
+			<button
+				class="bg-violet-300 px-5 py-3 rounded"
+				disabled
+			>
 				Previous page
 			</button>
 		{{/offset}}
 
 		{{#nextPageOffset}}
 			<button
-				class="pagination-next has-text-white-bis"
-				style="background-color: DarkViolet; border: 0px;"
+				class="bg-violet-500 hover:bg-violet-600 px-5 py-3 rounded text-slate-200"
 				name="offset"
 				value="{{nextPageOffset}}"
 			>
@@ -101,9 +46,12 @@
 			</button>
 		{{/nextPageOffset}}
 		{{^nextPageOffset}}
-			<button class="pagination-next" disabled>
+			<button
+				class="bg-violet-300 px-5 py-3 rounded"
+				disabled
+			>
 				Next page
 			</button>
 		{{/nextPageOffset}}
-	</nav>
+	</div>
 </form>

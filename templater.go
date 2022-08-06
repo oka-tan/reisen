@@ -13,8 +13,8 @@ type Templater struct {
 	templates map[string]*mustache.Template
 }
 
-func mustCompile(filename string) *mustache.Template {
-	template, err := mustache.ParseFile(filename)
+func mustCompile(filename string, partials mustache.PartialProvider) *mustache.Template {
+	template, err := mustache.ParseFilePartials(filename, partials)
 
 	if err != nil {
 		log.Fatalln(err)
@@ -24,23 +24,28 @@ func mustCompile(filename string) *mustache.Template {
 }
 
 func NewTemplater() *Templater {
-	layout := mustCompile("templates/layout.html.mustache")
+	fileProvider := &mustache.FileProvider{
+		Paths:      []string{"templates/"},
+		Extensions: []string{".html.mustache-partial"},
+	}
+
+	layout := mustCompile("templates/layout.html.mustache", fileProvider)
 
 	templates := map[string]*mustache.Template{
-		"index":                         mustCompile("templates/index.html.mustache"),
-		"board":                         mustCompile("templates/board.html.mustache"),
-		"board-error":                   mustCompile("templates/board-error.html.mustache"),
-		"board-empty":                   mustCompile("templates/board-empty.html.mustache"),
-		"board-search":                  mustCompile("templates/board-search.html.mustache"),
-		"board-search-thread-not-found": mustCompile("templates/board-search-thread-not-found.html.mustache"),
-		"board-search-bad-request":      mustCompile("templates/board-search-bad-request.html.mustache"),
-		"board-search-no-results":       mustCompile("templates/board-search-no-results.html.mustache"),
-		"board-search-server-error":     mustCompile("templates/board-search-server-error.html.mustache"),
-		"board-thread":                  mustCompile("templates/board-thread.html.mustache"),
-		"board-thread-error":            mustCompile("templates/board-thread-error.html.mustache"),
-		"board-thread-thread-not-found": mustCompile("templates/board-thread-not-found.html.mustache"),
-		"contact":                       mustCompile("templates/contact.html.mustache"),
-		"search-reference":              mustCompile("templates/search-reference.html.mustache"),
+		"index":                         mustCompile("templates/index.html.mustache", fileProvider),
+		"board":                         mustCompile("templates/board.html.mustache", fileProvider),
+		"board-error":                   mustCompile("templates/board-error.html.mustache", fileProvider),
+		"board-empty":                   mustCompile("templates/board-empty.html.mustache", fileProvider),
+		"board-search":                  mustCompile("templates/board-search.html.mustache", fileProvider),
+		"board-search-thread-not-found": mustCompile("templates/board-search-thread-not-found.html.mustache", fileProvider),
+		"board-search-bad-request":      mustCompile("templates/board-search-bad-request.html.mustache", fileProvider),
+		"board-search-no-results":       mustCompile("templates/board-search-no-results.html.mustache", fileProvider),
+		"board-search-server-error":     mustCompile("templates/board-search-server-error.html.mustache", fileProvider),
+		"board-thread":                  mustCompile("templates/board-thread.html.mustache", fileProvider),
+		"board-thread-error":            mustCompile("templates/board-thread-error.html.mustache", fileProvider),
+		"board-thread-not-found":        mustCompile("templates/board-thread-not-found.html.mustache", fileProvider),
+		"contact":                       mustCompile("templates/contact.html.mustache", fileProvider),
+		"search-reference":              mustCompile("templates/search-reference.html.mustache", fileProvider),
 	}
 
 	return &Templater{

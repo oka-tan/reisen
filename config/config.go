@@ -31,13 +31,14 @@ type LnxConfig struct {
 }
 
 type TemplateConfig struct {
-	ImagesUrl     string
-	ThumbnailsUrl string
-	FaviconUrl    string
-	CssUrl        string
-	JsUrl         string
-	TegakiJsUrl   string
-	TegakiCssUrl  string
+	ImagesUrl      string
+	ThumbnailsUrl  string
+	FaviconUrl     string
+	CssUrl         string
+	JsUrl          string
+	TailwindCssUrl string
+	TegakiJsUrl    string
+	TegakiCssUrl   string
 }
 
 func LoadConfig() Config {

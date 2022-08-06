@@ -1,27 +1,28 @@
 {
 	"PostgresConfig": {
-		"ConnectionString": "postgres://koiwai:koiwai@koiwai:5432/koiwai?sslmode=disable"
+		"ConnectionString": "postgres://postgres:12345678@postgres:5432/postgres?sslmode=disable"
 	},
 	"LnxConfig": {
 		"Host": "http://lnx",
 		"Port": 8000
 	},
-	"Hosts": ["eientei.xyz"],
+	"Hosts": [],
 	"Production": false,
 	"Boards": [
 		{
-			"Name": "v",
-			"Description": "Vidya"
+			"Name": "po",
+			"Description": "Papercraft & Origami"
 		}
 	],
-	"CspConfig": "default-src 'self' http://s3.localhost; style-src 'unsafe-inline' 'self' https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css; script-src 'self' https://cdnjs.cloudflare.com; font-src https://cdnjs.cloudflare.com;",
+	"CspConfig": "default-src 'self' http://s3.localhost http://cdn.localhost; style-src 'unsafe-inline' 'self' https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css; script-src 'self' https://cdnjs.cloudflare.com; font-src https://cdnjs.cloudflare.com;",
 	"TemplateConfig": {
-		"ImagesUrl": "http://s3.localhost/koiwai",
-		"ThumbnailsUrl": "http://s3.localhost/koiwai",
+		"ImagesUrl": "http://s3.localhost/ayase",
+		"ThumbnailsUrl": "http://s3.localhost/ayase",
 		"FaviconUrl": "http://reisen.localhost/favicon.ico",
 		"JsUrl": "http://reisen.localhost/static/reisen.js",
+		"TailwindCssUrl": "http://reisen.localhost/static/tailwind.css",
 		"TegakiJsUrl": "http://reisen.localhost/static/tegaki.min.js",
-		"CssUrl": "http://reisen.localhost/static/reisen.css",
-		"TegakiCssUrl": "http://reisen.localhost/static/tegaki.css"
+		"TegakiCssUrl": "http://reisen.localhost/static/tegaki.css",
+		"CssUrl": "http://reisen.localhost/static/reisen.css"
 	}
 }

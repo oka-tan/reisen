@@ -1,0 +1,61 @@
+<div 
+	id="p{{PostNumber}}"
+	{{#OekakiAvailable}}
+		data-oekaki-internal-hash="{{DerefOekakiInternalHash}}"
+	{{/OekakiAvailable}}
+	class="reisen-post mb-4 flex flex-col md:flex-row gap-5 bg-middle-zinc px-3 py-3 border border-zinc-900"
+>
+	{{^MediaTimestampIsNil}}
+		<div>
+			{{#MediaAvailable}}
+				<a 
+					href="{{conf.ImagesUrl}}/{{DerefMediaInternalHash}}"
+					target="_blank"
+					class="mx-auto"
+				>
+					<img
+						src="{{conf.ThumbnailsUrl}}/{{DerefThumbnailInternalHash}}"
+						alt="Image not available"
+						style="height: {{DerefThumbnailHeight}}px; width: {{DerefThumbnailWidth}}px;"
+					/>
+				</a>
+			{{/MediaAvailable}}
+			{{^MediaAvailable}}
+				{{#ThumbnailAvailable}}
+					<img
+						src="{{conf.ThumbnailsUrl}}/{{DerefThumbnailInternalHash}}"
+						alt="Image not available"
+						class="mx-auto"
+						style="height: {{DerefThumbnailHeight}}px; width: {{DerefThumbnailWidth}}px;"
+						title="Full image not available"
+					/>
+				{{/ThumbnailAvailable}}
+			{{/MediaAvailable}}
+			<p class="text-center text-slate-100">
+				<small>{{DerefMediaWidth}}x{{DerefMediaHeight}}</small>
+			</p>
+			<p class="text-center text-slate-100">
+				<small>{{DerefMediaFileNameShort}}.{{DerefMediaExtension}}</small>
+			</p>
+		</div>
+	{{/MediaTimestampIsNil}}
+	<div>
+		<p class="text-slate-100">
+			{{#Deleted}}
+				<span title="Deleted">🗑️</span>
+			{{/Deleted}}
+			<strong class="text-violet-500 text-bold">{{FormatName}}</strong>
+			at {{FormatTime}}
+			<a 
+				class="text-violet-500 hover:text-violet-600"
+				href="#p{{PostNumber}}"
+			>
+				No. {{PostNumber}}
+			</a>
+		</p>
+		<div class="flex gap-2" id="quoteLinks{{PostNumber}}"></div>
+		{{^CommentIsNil}}
+			<p class="text-slate-100">{{{DerefComment}}}</p>
+		{{/CommentIsNil}}
+	</div>
+</div>

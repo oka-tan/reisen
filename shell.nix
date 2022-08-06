@@ -1,4 +1,4 @@
 { pkgs ? import <nixpkgs> {} }:
   pkgs.mkShell {
-    nativeBuildInputs = [ pkgs.go_1_18 pkgs.graphviz pkgs.gv pkgs.golint ];
+    nativeBuildInputs = [ pkgs.go_1_18 pkgs.graphviz pkgs.gv pkgs.golint pkgs.nodePackages.tailwindcss];
 }
