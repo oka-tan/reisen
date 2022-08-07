@@ -11,12 +11,12 @@
 				<a 
 					href="{{conf.ImagesUrl}}/{{DerefMediaInternalHash}}"
 					target="_blank"
-					class="mx-auto"
 				>
 					<img
 						src="{{conf.ThumbnailsUrl}}/{{DerefThumbnailInternalHash}}"
 						alt="Image not available"
 						style="height: {{DerefThumbnailHeight}}px; width: {{DerefThumbnailWidth}}px;"
+						class="mx-auto"
 					/>
 				</a>
 			{{/MediaAvailable}}
