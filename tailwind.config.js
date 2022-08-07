@@ -22,7 +22,8 @@ module.exports = {
 				'4xl': '2rem',
 			},
 			colors: {
-				'middle-zinc': '#313135'
+				'middle-zinc': '#242429',
+				'dark-zinc': '#0c0c0e'
 			}
 		},
 	},

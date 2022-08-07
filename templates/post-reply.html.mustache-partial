@@ -4,7 +4,7 @@
 		{{#OekakiAvailable}}
 			data-oekaki-internal-hash="{{DerefOekakiInternalHash}}"
 		{{/OekakiAvailable}}
-		class="reisen-post reisen-post-reply mb-4 flex md:inline-flex flex-col md:flex-row gap-5 bg-middle-zinc px-4 py-4 border border-zinc-900 target:border-2 target:border-violet-500"
+		class="reisen-post reisen-post-reply mb-4 flex md:inline-flex flex-col md:flex-row gap-5 bg-middle-zinc px-4 py-4 border border-dark-zinc target:border-2 target:border-violet-500"
 	>
 		{{^MediaTimestampIsNil}}
 			<div class="flex-none">
