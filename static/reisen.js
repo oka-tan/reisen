@@ -1,40 +1,44 @@
+//Global variables
+const quoteLinkRegex = /^>>\d+$/;
+const toggleRegex = /^toggle\('.*'\)$/;
+const board = document.documentElement.getAttribute('data-board');
+const oekakiUrl = document.documentElement.getAttribute('data-oekaki-url');
+
 //Global functions
 function playOekaki(oekakiInternalHash) {
 	Tegaki.open({
 		replayMode: true,
-		replayURL: `http://s3.localhost/ayase/${oekakiInternalHash}`
+		replayURL: `${oekakiUrl}/${oekakiInternalHash}`
 	});
 }
 
 function toggle(id) {
-	var element = document.getElementById(id);
-	element.classList.toggle("hidden");
+	const element = document.getElementById(id);
+
+	if (element) {
+		element.classList.toggle("hidden");
+	}
 }
 
-//Global variables
-var quoteLinkRegex = /^>>\d+$/;
-var toggleRegex = /^toggle\('.*'\)$/;
-var board = document.documentElement.getAttribute('data-board');
-
 //Doing stuff proper
-for (let reisenPost of document.getElementsByClassName('reisen-post')) {
-	postNumber = reisenPost.id.substring(1);
+for (const reisenPost of document.getElementsByClassName('reisen-post')) {
+	const postNumber = reisenPost.id.substring(1);
 
-	for (let aElement of reisenPost.getElementsByTagName('a')) {
+	for (const aElement of reisenPost.getElementsByTagName('a')) {
 		if (aElement.textContent.match(quoteLinkRegex)) {
-			postNumberReferenced = aElement.textContent.substring(2);
+			const postNumberReferenced = aElement.textContent.substring(2);
 
 			//Fix search quotelinks
 			if (reisenPost.classList.contains('reisen-post-ambiguous') || reisenPost.classList.contains('reisen-thread')) {
 				aElement.href = '/' + board + '/post/' + postNumberReferenced;
 			} else if (reisenPost.classList.contains('reisen-post-op') || reisenPost.classList.contains('reisen-post-reply')) {
-				quoteLinksHolder = document.getElementById('quoteLinks' + postNumberReferenced);
+				const quoteLinksHolder = document.getElementById('quoteLinks' + postNumberReferenced);
 
 				if (quoteLinksHolder) {
 					//Ensure the link is correct.
 					aElement.href = '#p' + postNumberReferenced;
 
-					quoteLink = document.createElement('a');
+					const quoteLink = document.createElement('a');
 
 					quoteLink.textContent = '>>' + postNumber;
 					quoteLink.href = '#' + reisenPost.id;
@@ -50,7 +54,7 @@ for (let reisenPost of document.getElementsByClassName('reisen-post')) {
 			}
 		} else if (aElement.href.substring(0, 19) === 'javascript:oeReplay') {
 			//Fix oekaki links
-			oekakiInternalHash = reisenPost.getAttribute('data-oekaki-internal-hash');
+			const oekakiInternalHash = reisenPost.getAttribute('data-oekaki-internal-hash');
 			//Point the href to the post element for convenience
 			aElement.href = '#' + reisenPost.id;
 			aElement.classList.add('text-violet-500');
@@ -73,12 +77,12 @@ for (let reisenPost of document.getElementsByClassName('reisen-post')) {
 			aElement.classList.add('text-violet-500');
 			aElement.classList.add('hover:text-violet-600');
 
-			rawOnclick = aElement.getAttribute('onclick');
+			const rawOnclick = aElement.getAttribute('onclick');
 			//CSP should, unless you've misconfigured it,
 			//prevent the onclick from working (which is good and secure).
 			//Hence, we need to fix it (but just toggles).
 			if (rawOnclick.match(toggleRegex)) {
-				toggleId = rawOnclick.substring(8, rawOnclick.length - 2);
+				const toggleId = rawOnclick.substring(8, rawOnclick.length - 2);
 				aElement.onclick = function(toggleId) {
 					return function() { toggle(toggleId); }
 				}(toggleId);
@@ -88,7 +92,7 @@ for (let reisenPost of document.getElementsByClassName('reisen-post')) {
 }
 
 //Hide the exif tables by default
-for (let exifTable of document.getElementsByClassName("exif")) {
+for (const exifTable of document.getElementsByClassName("exif")) {
 	exifTable.classList.add("hidden");
 }
 

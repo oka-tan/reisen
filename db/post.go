@@ -147,6 +147,10 @@ func (p *Post) DerefMediaInternalHash() string {
 	return base64.URLEncoding.EncodeToString(*(p.MediaInternalHash))
 }
 
+func (p *Post) DerefMedia4chanHash() string {
+	return base64.URLEncoding.EncodeToString(*(p.Media4chanHash))
+}
+
 func (p *Post) MediaAvailable() bool {
 	return p.MediaInternalHash != nil
 }

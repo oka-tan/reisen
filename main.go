@@ -47,6 +47,7 @@ func main() {
 	e.GET("/:board/thread/:thread_number", handlers.BoardThread(pg, conf))
 	e.GET("/:board/search", handlers.BoardSearch(pg, lnxService, conf))
 	e.GET("/:board/post/:post_number", handlers.BoardPost(pg, conf))
+	e.GET("/:board/view-same/:media_4chan_hash", handlers.BoardViewSame(pg, conf))
 
 	if conf.Production {
 		e.AutoTLSManager.HostPolicy = autocert.HostWhitelist(conf.Hosts...)

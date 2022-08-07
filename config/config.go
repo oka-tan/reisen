@@ -33,6 +33,7 @@ type LnxConfig struct {
 type TemplateConfig struct {
 	ImagesUrl      string
 	ThumbnailsUrl  string
+	OekakiUrl      string
 	FaviconUrl     string
 	CssUrl         string
 	JsUrl          string

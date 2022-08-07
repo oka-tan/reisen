@@ -7,6 +7,38 @@
 >
 	{{^MediaTimestampIsNil}}
 		<div class="flex-none">
+			<div class="flex justify-between gap-2 text-xs mb-2 items-stretch">
+				<a 
+					class="text-violet-500 hover:text-violet-600"
+					href="/{{board}}/view-same/{{DerefMedia4chanHash}}"
+				>
+					View Same
+				</a>
+				<a 
+					class="text-violet-500 hover:text-violet-600"
+					href="https://www.google.com/searchbyimage?image_url={{conf.ThumbnailsUrl}}/{{DerefThumbnailInternalHash}}"
+				>
+					Google
+				</a>
+				<a 
+					class="text-violet-500 hover:text-violet-600"
+					href="https://imgops.com/{{conf.ThumbnailsUrl}}/{{DerefThumbnailInternalHash}}"
+				>
+					ImgOps
+				</a>
+				<a 
+					class="text-violet-500 hover:text-violet-600"
+					href="https://iqdb.org?url={{conf.ThumbnailsUrl}}/{{DerefThumbnailInternalHash}}"
+				>
+					iqdb
+				</a>
+				<a 
+					class="text-violet-500 hover:text-violet-600"
+					href="https://saucenao.com/search.php?url={{conf.ThumbnailsUrl}}/{{DerefThumbnailInternalHash}}"
+				>
+					SauceNAO
+				</a>
+			</div>
 			{{#MediaAvailable}}
 				<a 
 					href="{{conf.ImagesUrl}}/{{DerefMediaInternalHash}}"

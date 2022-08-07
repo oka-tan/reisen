@@ -18,6 +18,7 @@
 	"TemplateConfig": {
 		"ImagesUrl": "http://s3.localhost/ayase",
 		"ThumbnailsUrl": "http://s3.localhost/ayase",
+		"OekakiUrl": "http://s3.localhost/ayase",
 		"FaviconUrl": "http://reisen.localhost/favicon.ico",
 		"JsUrl": "http://reisen.localhost/static/reisen.js",
 		"CssUrl": "http://reisen.localhost/static/reisen.css",
