@@ -76,7 +76,7 @@
 		{{/MediaTimestampIsNil}}
 		<div class="px-2 py-2">
 			{{#Op}}
-				<h2 class="text-violet-500 text-xl">
+				<h2 class="text-fuchsia-500 text-xl">
 					{{#Deleted}}
 						<span title="Deleted">🗑️</span>
 					{{/Deleted}}
@@ -91,7 +91,7 @@
 						<span title="Deleted">🗑️</span>
 					{{/Deleted}}
 				{{/Op}}
-				<strong class="text-violet-500 text-bold">{{FormatName}}</strong>
+				<strong class="text-fuchsia-500 text-bold">{{FormatName}}</strong>
 				at {{FormatTime}}
 				<a 
 					class="text-violet-500 hover:text-violet-600"
