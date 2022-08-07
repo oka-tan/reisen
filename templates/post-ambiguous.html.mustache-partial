@@ -3,7 +3,7 @@
 	{{#OekakiAvailable}}
 		data-oekaki-internal-hash="{{DerefOekakiInternalHash}}"
 	{{/OekakiAvailable}}
-	class="reisen-post reisen-post-ambiguous mb-4 flex flex-col md:flex-row gap-5"
+	class="reisen-post reisen-post-ambiguous mb-4 flex flex-col md:flex-row gap-5 bg-middle-zinc px-4 py-4 border border-zinc-900"
 >
 	{{^MediaTimestampIsNil}}
 		<div class="flex-none">
