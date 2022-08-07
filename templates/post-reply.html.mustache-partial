@@ -7,6 +7,32 @@
 >
 	{{^MediaTimestampIsNil}}
 		<div class="flex-none">
+			{{#MediaAvailable}}
+				<a 
+					href="{{conf.ImagesUrl}}/{{DerefMediaInternalHash}}"
+					target="_blank"
+				>
+					<img
+						src="{{conf.ThumbnailsUrl}}/{{DerefThumbnailInternalHash}}"
+						alt="Image not available"
+						style="height: {{DerefThumbnailHeight}}px; width: {{DerefThumbnailWidth}}px;"
+						class="mx-auto"
+						loading="lazy"
+					/>
+				</a>
+			{{/MediaAvailable}}
+			{{^MediaAvailable}}
+				{{#ThumbnailAvailable}}
+					<img
+						src="{{conf.ThumbnailsUrl}}/{{DerefThumbnailInternalHash}}"
+						alt="Image not available"
+						class="mx-auto"
+						style="height: {{DerefThumbnailHeight}}px; width: {{DerefThumbnailWidth}}px;"
+						title="Full image not available"
+						loading="lazy"
+					/>
+				{{/ThumbnailAvailable}}
+			{{/MediaAvailable}}
 			<div class="flex justify-between gap-2 text-xs mb-2 items-stretch">
 				<a 
 					class="text-violet-500 hover:text-violet-600"
@@ -39,30 +65,6 @@
 					SauceNAO
 				</a>
 			</div>
-			{{#MediaAvailable}}
-				<a 
-					href="{{conf.ImagesUrl}}/{{DerefMediaInternalHash}}"
-					target="_blank"
-				>
-					<img
-						src="{{conf.ThumbnailsUrl}}/{{DerefThumbnailInternalHash}}"
-						alt="Image not available"
-						style="height: {{DerefThumbnailHeight}}px; width: {{DerefThumbnailWidth}}px;"
-						class="mx-auto"
-					/>
-				</a>
-			{{/MediaAvailable}}
-			{{^MediaAvailable}}
-				{{#ThumbnailAvailable}}
-					<img
-						src="{{conf.ThumbnailsUrl}}/{{DerefThumbnailInternalHash}}"
-						alt="Image not available"
-						class="mx-auto"
-						style="height: {{DerefThumbnailHeight}}px; width: {{DerefThumbnailWidth}}px;"
-						title="Full image not available"
-					/>
-				{{/ThumbnailAvailable}}
-			{{/MediaAvailable}}
 			<p class="text-center text-slate-100">
 				<small>{{DerefMediaWidth}}x{{DerefMediaHeight}}</small>
 			</p>
