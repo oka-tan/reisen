@@ -16,7 +16,7 @@
 						src="{{conf.ThumbnailsUrl}}/{{DerefThumbnailInternalHash}}"
 						alt="Image not available"
 						style="height: {{DerefThumbnailHeight}}px; width: {{DerefThumbnailWidth}}px;"
-						class="mx-auto"
+						class="mx-auto mb-2"
 						loading="lazy"
 					/>
 				</a>
@@ -26,14 +26,14 @@
 					<img
 						src="{{conf.ThumbnailsUrl}}/{{DerefThumbnailInternalHash}}"
 						alt="Image not available"
-						class="mx-auto"
+						class="mx-auto mb-2"
 						style="height: {{DerefThumbnailHeight}}px; width: {{DerefThumbnailWidth}}px;"
 						title="Full image not available"
 						loading="lazy"
 					/>
 				{{/ThumbnailAvailable}}
 			{{/MediaAvailable}}
-			<div class="flex justify-between gap-2 text-xs mb-2 items-stretch">
+			<div class="flex justify-between gap-2 text-xs items-stretch">
 				<a 
 					class="text-violet-500 hover:text-violet-600"
 					href="/{{board}}/view-same/{{DerefMedia4chanHash}}"
