@@ -11,7 +11,7 @@ import (
 	"github.com/uptrace/bun"
 )
 
-func Board(pg *bun.DB, conf config.Config) func(echo.Context) error {
+func BoardCatalogVariant(pg *bun.DB, conf config.Config) func(echo.Context) error {
 	return func(c echo.Context) error {
 		board := c.Param("board")
 
@@ -83,6 +83,6 @@ func Board(pg *bun.DB, conf config.Config) func(echo.Context) error {
 			"rkeyset": rkeyset,
 		}
 
-		return c.Render(http.StatusOK, "board", model)
+		return c.Render(http.StatusOK, "board-catalog-variant", model)
 	}
 }

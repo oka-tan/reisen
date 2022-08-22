@@ -4,10 +4,10 @@
 		{{#OekakiAvailable}}
 			data-oekaki-internal-hash="{{DerefOekakiInternalHash}}"
 		{{/OekakiAvailable}}
-		class="reisen-post reisen-post-ambiguous mb-4 flex md:inline-flex flex-col md:flex-row gap-5 bg-middle-zinc px-4 py-4 border border-dark-zinc"
+		class="reisen-post reisen-post-ambiguous"
 	>
 		{{^MediaTimestampIsNil}}
-			<div class="flex-none">
+			<div class="post-image-div">
 				{{#MediaAvailable}}
 					<a 
 						href="{{conf.ImagesUrl}}/{{DerefMediaInternalHash}}"
@@ -17,7 +17,7 @@
 							src="{{conf.ThumbnailsUrl}}/{{DerefThumbnailInternalHash}}"
 							alt="Image not available"
 							style="height: {{DerefThumbnailHeight}}px; width: {{DerefThumbnailWidth}}px;"
-							class="mx-auto mb-2"
+							class="post-image"
 							loading="lazy"
 						/>
 					</a>
@@ -27,56 +27,41 @@
 						<img
 							src="{{conf.ThumbnailsUrl}}/{{DerefThumbnailInternalHash}}"
 							alt="Image not available"
-							class="mx-auto mb-2"
+							class="post-image"
 							style="height: {{DerefThumbnailHeight}}px; width: {{DerefThumbnailWidth}}px;"
 							title="Full image not available"
 							loading="lazy"
 						/>
 					{{/ThumbnailAvailable}}
 				{{/MediaAvailable}}
-				<div class="flex justify-between gap-2 text-xs items-stretch">
-					<a 
-						class="text-violet-500 hover:text-violet-600"
-						href="/{{board}}/view-same/{{DerefMedia4chanHash}}"
-					>
+				<div class="view-same-div">
+					<a href="/{{board}}/view-same/{{DerefMedia4chanHash}}">
 						View Same
 					</a>
-					<a 
-						class="text-violet-500 hover:text-violet-600"
-						href="https://www.google.com/searchbyimage?image_url={{conf.ThumbnailsUrl}}/{{DerefThumbnailInternalHash}}"
-					>
-						Google
+					<a href="https://yandex.com/images/search?rpt=imageview&url={{conf.ThumbnailsUrl}}/{{DerefThumbnailInternalHash}}">
+						Yandex
 					</a>
-					<a 
-						class="text-violet-500 hover:text-violet-600"
-						href="https://imgops.com/{{conf.ThumbnailsUrl}}/{{DerefThumbnailInternalHash}}"
-					>
+					<a href="https://imgops.com/{{conf.ThumbnailsUrl}}/{{DerefThumbnailInternalHash}}">
 						ImgOps
 					</a>
-					<a 
-						class="text-violet-500 hover:text-violet-600"
-						href="https://iqdb.org?url={{conf.ThumbnailsUrl}}/{{DerefThumbnailInternalHash}}"
-					>
+					<a href="https://iqdb.org?url={{conf.ThumbnailsUrl}}/{{DerefThumbnailInternalHash}}">
 						iqdb
 					</a>
-					<a 
-						class="text-violet-500 hover:text-violet-600"
-						href="https://saucenao.com/search.php?url={{conf.ThumbnailsUrl}}/{{DerefThumbnailInternalHash}}"
-					>
+					<a href="https://saucenao.com/search.php?url={{conf.ThumbnailsUrl}}/{{DerefThumbnailInternalHash}}">
 						SauceNAO
 					</a>
 				</div>
-				<p class="text-center text-slate-200">
+				<p>
 					<small>{{DerefMediaWidth}}x{{DerefMediaHeight}}</small>
 				</p>
-				<p class="text-center text-slate-200">
+				<p>
 					<small>{{DerefMediaFileNameShort}}.{{DerefMediaExtension}}</small>
 				</p>
 			</div>
 		{{/MediaTimestampIsNil}}
-		<div class="px-2 py-2">
+		<div>
 			{{#Op}}
-				<h2 class="text-fuchsia-500 text-xl">
+				<h2 class="thread-subject">
 					{{#Deleted}}
 						<span title="Deleted">🗑️</span>
 					{{/Deleted}}
@@ -85,23 +70,20 @@
 					{{^SubjectIsNil}} {{{DerefSubject}}} {{/SubjectIsNil}}
 				</h2>
 			{{/Op}}
-			<p class="text-slate-200">
+			<p class="post-name-p">
 				{{^Op}}
 					{{#Deleted}}
 						<span title="Deleted">🗑️</span>
 					{{/Deleted}}
 				{{/Op}}
-				<strong class="text-fuchsia-500 text-bold">{{FormatName}}</strong>
+				<strong class="post-name">{{FormatName}}</strong>
 				at {{FormatTime}}
-				<a 
-					class="text-violet-500 hover:text-violet-600"
-					href="/{{board}}/thread/{{ThreadNumber}}#p{{PostNumber}}"
-				>
+				<a href="/{{board}}/thread/{{ThreadNumber}}#p{{PostNumber}}">
 					No. {{PostNumber}}
 				</a>
 			</p>
 			{{^CommentIsNil}}
-				<p class="text-slate-200 mt-3">{{{DerefComment}}}</p>
+				<p class="comment">{{{DerefComment}}}</p>
 			{{/CommentIsNil}}
 		</div>
 	</div>

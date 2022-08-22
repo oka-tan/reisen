@@ -1,4 +1,4 @@
-<h1 class="text-slate-200 text-3xl mb-4">
+<h1>
 	{{#countMoreThanOne}}
 		{{count}} results found
 	{{/countMoreThanOne}}
@@ -17,39 +17,26 @@
 		name="search"
 		value="{{search}}"
 	/>
-	<div class="flex justify-between">
+	<div class="pagination">
 		{{#offset}}
-			<button
-				class="bg-violet-500 hover:bg-violet-600 px-5 py-3 rounded text-slate-200"
-				name="offset"
-				value="{{previousPageOffset}}"
+			<button name="offset" value="{{previousPageOffset}}"
 			>
 				Previous page
 			</button>
 		{{/offset}}
 		{{^offset}}
-			<button
-				class="bg-violet-300 px-5 py-3 rounded"
-				disabled
-			>
+			<button disabled>
 				Previous page
 			</button>
 		{{/offset}}
 
 		{{#nextPageOffset}}
-			<button
-				class="bg-violet-500 hover:bg-violet-600 px-5 py-3 rounded text-slate-200"
-				name="offset"
-				value="{{nextPageOffset}}"
-			>
+			<button name="offset" value="{{nextPageOffset}}">
 				Next page
 			</button>
 		{{/nextPageOffset}}
 		{{^nextPageOffset}}
-			<button
-				class="bg-violet-300 px-5 py-3 rounded"
-				disabled
-			>
+			<button disabled>
 				Next page
 			</button>
 		{{/nextPageOffset}}

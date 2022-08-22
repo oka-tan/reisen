@@ -1,9 +1,13 @@
-{{#posts}}
-	{{>post-ambiguous}}
-{{/posts}}
+{{#threads}}
+	{{>thread}}
+	<hr/>
+{{/threads}}
 <div class="pagination">
 	{{#rkeyset}}
-		<a href="/{{board}}?rkeyset={{rkeyset}}">
+		<a
+			class="button"
+			href="/{{board}}?rkeyset={{rkeyset}}"
+		>
 			Previous page
 		</a>
 	{{/rkeyset}}
@@ -14,7 +18,10 @@
 	{{/rkeyset}}
 
 	{{#keyset}}
-		<a href="/{{board}}?keyset={{keyset}}">
+		<a
+			class="button"
+			href="/{{board}}?keyset={{keyset}}"
+		>
 			Next page
 		</a>
 	{{/keyset}}
@@ -23,4 +30,4 @@
 			Next page
 		</button>
 	{{/keyset}}
-</div>
+</nav>

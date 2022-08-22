@@ -43,7 +43,7 @@ func main() {
 	e.GET("/", handlers.Index(pg, conf))
 	e.GET("/contact", handlers.Contact(pg, conf))
 	e.GET("/search-reference", handlers.SearchReference(pg, conf))
-	e.GET("/:board", handlers.Board(pg, conf))
+	e.GET("/:board", handlers.BoardCatalogVariant(pg, conf))
 	e.GET("/:board/thread/:thread_number", handlers.BoardThread(pg, conf))
 	e.GET("/:board/search", handlers.BoardSearch(pg, lnxService, conf))
 	e.GET("/:board/post/:post_number", handlers.BoardPost(pg, conf))

@@ -33,7 +33,7 @@ func NewTemplater() *Templater {
 
 	templates := map[string]*mustache.Template{
 		"index":                         mustCompile("templates/index.html.mustache", fileProvider),
-		"board":                         mustCompile("templates/board.html.mustache", fileProvider),
+		"board-catalog-variant":         mustCompile("templates/board-catalog-variant.html.mustache", fileProvider),
 		"board-error":                   mustCompile("templates/board-error.html.mustache", fileProvider),
 		"board-empty":                   mustCompile("templates/board-empty.html.mustache", fileProvider),
 		"board-search":                  mustCompile("templates/board-search.html.mustache", fileProvider),
@@ -44,6 +44,7 @@ func NewTemplater() *Templater {
 		"board-thread":                  mustCompile("templates/board-thread.html.mustache", fileProvider),
 		"board-thread-error":            mustCompile("templates/board-thread-error.html.mustache", fileProvider),
 		"board-thread-not-found":        mustCompile("templates/board-thread-not-found.html.mustache", fileProvider),
+		"board-post-not-found":          mustCompile("templates/board-post-not-found.html.mustache", fileProvider),
 		"board-view-same":               mustCompile("templates/board-view-same.html.mustache", fileProvider),
 		"board-view-same-error":         mustCompile("templates/board-view-same-error.html.mustache", fileProvider),
 		"board-view-same-empty":         mustCompile("templates/board-view-same-empty.html.mustache", fileProvider),

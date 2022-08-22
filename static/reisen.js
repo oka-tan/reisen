@@ -24,8 +24,19 @@ function toggle(id) {
 for (const reisenPost of document.getElementsByClassName('reisen-post')) {
 	const postNumber = reisenPost.id.substring(1);
 
+
+	for (const deadLinkElement of reisenPost.getElementsByClassName('deadlink')) {
+		const aElement = document.createElement('a');
+		
+		aElement.textContent = deadLinkElement.textContent;
+		
+		deadLinkElement.parentNode.replaceChild(aElement, deadLinkElement);
+	}
+
 	for (const aElement of reisenPost.getElementsByTagName('a')) {
-		if (aElement.textContent.match(quoteLinkRegex)) {
+		if (aElement.classList.contains('reisen-backlink')) {
+			continue;
+		} else if (aElement.textContent.match(quoteLinkRegex)) {
 			const postNumberReferenced = aElement.textContent.substring(2);
 
 			//Fix search quotelinks
@@ -42,9 +53,7 @@ for (const reisenPost of document.getElementsByClassName('reisen-post')) {
 
 					quoteLink.textContent = '>>' + postNumber;
 					quoteLink.href = '#' + reisenPost.id;
-					quoteLink.classList.add('text-violet-500');
-					quoteLink.classList.add('hover:text-violet-600');
-					quoteLink.classList.add('text-xs');
+					quoteLink.classList.add('reisen-backlink');
 
 					quoteLinksHolder.appendChild(quoteLink);
 				} else {
@@ -57,8 +66,6 @@ for (const reisenPost of document.getElementsByClassName('reisen-post')) {
 			const oekakiInternalHash = reisenPost.getAttribute('data-oekaki-internal-hash');
 			//Point the href to the post element for convenience
 			aElement.href = '#' + reisenPost.id;
-			aElement.classList.add('text-violet-500');
-			aElement.classList.add('hover:text-violet-600');
 
 			if (oekakiInternalHash) {
 				//We need to do this song and dance
@@ -74,8 +81,6 @@ for (const reisenPost of document.getElementsByClassName('reisen-post')) {
 			//The href is something like 'javascript:void(0)',
 			//which causes CSP issues with the onclick action.
 			aElement.href = '#' + reisenPost.id;
-			aElement.classList.add('text-violet-500');
-			aElement.classList.add('hover:text-violet-600');
 
 			const rawOnclick = aElement.getAttribute('onclick');
 			//CSP should, unless you've misconfigured it,

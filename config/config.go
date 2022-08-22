@@ -7,13 +7,14 @@ import (
 )
 
 type Config struct {
-	PostgresConfig PostgresConfig
-	LnxConfig      LnxConfig
-	Boards         []BoardConfig
-	CspConfig      string
-	TemplateConfig TemplateConfig
-	Hosts          []string
-	Production     bool
+	PostgresConfig    PostgresConfig
+	LnxConfig         LnxConfig
+	Boards            []BoardConfig
+	CspConfig         string
+	TemplateConfig    TemplateConfig
+	Hosts             []string
+	Production        bool
+	UseCatalogVariant bool
 }
 
 type BoardConfig struct {
@@ -31,15 +32,14 @@ type LnxConfig struct {
 }
 
 type TemplateConfig struct {
-	ImagesUrl      string
-	ThumbnailsUrl  string
-	OekakiUrl      string
-	FaviconUrl     string
-	CssUrl         string
-	JsUrl          string
-	TailwindCssUrl string
-	TegakiJsUrl    string
-	TegakiCssUrl   string
+	ImagesUrl     string
+	ThumbnailsUrl string
+	OekakiUrl     string
+	FaviconUrl    string
+	CssUrl        string
+	JsUrl         string
+	TegakiJsUrl   string
+	TegakiCssUrl  string
 }
 
 func LoadConfig() Config {
