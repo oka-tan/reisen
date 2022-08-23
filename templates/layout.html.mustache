@@ -7,12 +7,13 @@
 	{{#conf.OekakiUrl}}
 		data-oekaki-url="{{conf.OekakiUrl}}"
 	{{/conf.OekakiUrl}}
+	data-base-css-url="{{conf.BaseCssUrl}}"
 >
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" href="{{conf.TegakiCssUrl}}">
-		<link rel="stylesheet" href="{{conf.CssUrl}}"/>
+		<link rel="stylesheet" id="main-css-link" href="{{conf.DefaultTheme.Url}}"/>
 		<link rel="icon" href="{{conf.FaviconUrl}}"/>
 		<title>
 			Eientei Archive
@@ -20,11 +21,12 @@
 				- /{{board}}/
 			{{/board}}
 		</title>
-		<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js?config=TeX-AMS_HTML-full"></script>
-		<script src="{{conf.TegakiJsUrl}}"></script>
+		<script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js?config=TeX-AMS_HTML-full"></script>
+		<script async src="{{conf.TegakiJsUrl}}"></script>
+		<script src="{{conf.JsUrl}}"></script>
 	</head>
 	<body>
-		<nav>
+		<header id="header">
 			<div id="board-list">
 				Boards:
 				{{#boards}} <a href="/{{Name}}">/{{Name}}/</a> {{/boards}}
@@ -51,10 +53,16 @@
 					</form>
 				{{/board}}
 			</div>
-		</nav>
+		</header>
 		<div id="content">
 			{{{content}}}
 		</div>
-		<script src="{{conf.JsUrl}}"></script>
+		<footer id="footer">
+			<select id="theme-select">
+				{{#conf.Themes}}
+					<option value={{Url}}>{{Name}}</option>
+				{{/conf.Themes}}
+			</select>
+		</footer>
 	</body>
 </html>

@@ -21,8 +21,25 @@
 		"OekakiUrl": "http://s3.localhost/ayase",
 		"FaviconUrl": "http://reisen.localhost/favicon.ico",
 		"JsUrl": "http://reisen.localhost/static/reisen.js",
-		"CssUrl": "http://reisen.localhost/static/reisen.css",
 		"TegakiJsUrl": "http://reisen.localhost/static/tegaki.min.js",
-		"TegakiCssUrl": "http://reisen.localhost/static/tegaki.css"
+		"TegakiCssUrl": "http://reisen.localhost/static/tegaki.css",
+		"Themes": [
+			{
+				"Name": "Reisen Default Theme",
+				"Url": "/static/reisen.css"
+			},
+			{
+				"Name": "Reisen Tibix Theme",
+				"Url": "/static/reisen-tibix.css"
+			},
+			{
+				"Name": "Reisen RBT Theme",
+				"Url": "/static/reisen-rbt.css"
+			}
+		],
+		"DefaultTheme": {
+			"Name": "Reisen Default Theme",
+			"Url": "/static/reisen.css"
+		}
 	}
 }

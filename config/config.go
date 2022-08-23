@@ -36,10 +36,17 @@ type TemplateConfig struct {
 	ThumbnailsUrl string
 	OekakiUrl     string
 	FaviconUrl    string
-	CssUrl        string
+	BaseCssUrl    string
 	JsUrl         string
 	TegakiJsUrl   string
 	TegakiCssUrl  string
+	Themes        []Theme
+	DefaultTheme  Theme
+}
+
+type Theme struct {
+	Name string
+	Url  string
 }
 
 func LoadConfig() Config {

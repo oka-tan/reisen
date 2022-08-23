@@ -3,17 +3,17 @@
  */
 
 :root {
-	--link-color: #8b5cf6;
-	--link-hover-color: #7c3aed;
-	--muted-link-color: #c4b5fd;
-	--greentext-color: #16a34a;
-	--primary-color: #d946ef;
+	--link-color: #86efac;
+	--link-hover-color: #4ade80;
+	--muted-link-color: #bbf7d0;
+	--greentext-color: #4ade80;
+	--primary-color: #22c55e;
 	--primary-text-color: #e2e8f0;
-	--post-bg-color: #242429;
-	--main-bg-color: #18181b;
-	--nav-bg-color: #0c0c0e;
+	--post-bg-color: #374151;
+	--main-bg-color: #1F2937;
+	--nav-bg-color: #15803d;
 	--deadlink-color: red;
-	--button-text-color: #e2e8f0;
+	--button-text-color: #1f2937;
 }
 
 /*
@@ -230,16 +230,10 @@ select {
 
 .reisen-post-reply {
 	background-color: var(--post-bg-color);
-	border-width: 1px;
-	border-style: solid;
-	border-color: var(--nav-bg-color);
 }
 
 .reisen-post-ambiguous {
 	background-color: var(--post-bg-color);
-	border-width: 1px;
-	border-style: solid;
-	border-color: var(--nav-bg-color);
 }
 
 .post-image {
