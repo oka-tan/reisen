@@ -334,7 +334,7 @@ span.deadlink {
 		display: inline-flex;
 	}
 
-	.reisen-post-op, .thread {
+	.reisen-post-op, .reisen-thread {
 		display: flex;
 	}
 }

@@ -32,7 +32,7 @@ func BoardCatalogVariant(pg *bun.DB, conf config.Config) func(echo.Context) erro
 			Scan(context.Background())
 
 		if err != nil {
-			return c.Render(http.StatusOK, "board-error", map[string]interface{}{
+			return c.Render(http.StatusInternalServerError, "board-error", map[string]interface{}{
 				"boards": conf.Boards,
 				"conf":   conf.TemplateConfig,
 				"board":  board,
@@ -40,7 +40,7 @@ func BoardCatalogVariant(pg *bun.DB, conf config.Config) func(echo.Context) erro
 		}
 
 		if len(threads) == 0 {
-			return c.Render(http.StatusOK, "board-empty", map[string]interface{}{
+			return c.Render(http.StatusNoContent, "board-empty", map[string]interface{}{
 				"boards": conf.Boards,
 				"conf":   conf.TemplateConfig,
 				"board":  board,
@@ -75,12 +75,14 @@ func BoardCatalogVariant(pg *bun.DB, conf config.Config) func(echo.Context) erro
 		}
 
 		model := map[string]interface{}{
-			"boards":  conf.Boards,
-			"conf":    conf.TemplateConfig,
-			"board":   board,
-			"threads": threads,
-			"keyset":  keyset,
-			"rkeyset": rkeyset,
+			"boards":       conf.Boards,
+			"conf":         conf.TemplateConfig,
+			"board":        board,
+			"threads":      threads,
+			"keyset":       keyset,
+			"rkeyset":      rkeyset,
+			"enableLatex":  conf.IsLatexEnabled(board),
+			"enableTegaki": conf.IsTegakiEnabled(board),
 		}
 
 		return c.Render(http.StatusOK, "board-catalog-variant", model)

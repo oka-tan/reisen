@@ -12,6 +12,7 @@
 					<a 
 						href="{{conf.ImagesUrl}}/{{DerefMediaInternalHash}}"
 						target="_blank"
+						rel="nofollow"
 					>
 						<img
 							src="{{conf.ThumbnailsUrl}}/{{DerefThumbnailInternalHash}}"
@@ -34,23 +35,25 @@
 						/>
 					{{/ThumbnailAvailable}}
 				{{/MediaAvailable}}
-				<div class="view-same-div">
-					<a href="/{{board}}/view-same/{{DerefMedia4chanHash}}">
-						View Same
-					</a>
-					<a href="https://yandex.com/images/search?rpt=imageview&url={{conf.ThumbnailsUrl}}/{{DerefThumbnailInternalHash}}">
-						Yandex
-					</a>
-					<a href="https://imgops.com/{{conf.ThumbnailsUrl}}/{{DerefThumbnailInternalHash}}">
-						ImgOps
-					</a>
-					<a href="https://iqdb.org?url={{conf.ThumbnailsUrl}}/{{DerefThumbnailInternalHash}}">
-						iqdb
-					</a>
-					<a href="https://saucenao.com/search.php?url={{conf.ThumbnailsUrl}}/{{DerefThumbnailInternalHash}}">
-						SauceNAO
-					</a>
-				</div>
+				{{#ThumbnailAvailable}}
+					<div class="view-same-div">
+						<a href="/{{board}}/view-same/{{DerefMedia4chanHash}}">
+							View Same
+						</a>
+						<a href="https://yandex.com/images/search?rpt=imageview&url={{conf.ThumbnailsUrl}}/{{DerefThumbnailInternalHash}}">
+							Yandex
+						</a>
+						<a href="https://imgops.com/{{conf.ThumbnailsUrl}}/{{DerefThumbnailInternalHash}}">
+							ImgOps
+						</a>
+						<a href="https://iqdb.org?url={{conf.ThumbnailsUrl}}/{{DerefThumbnailInternalHash}}">
+							iqdb
+						</a>
+						<a href="https://saucenao.com/search.php?url={{conf.ThumbnailsUrl}}/{{DerefThumbnailInternalHash}}">
+							SauceNAO
+						</a>
+					</div>
+				{{/ThumbnailAvailable}}
 				<p>
 					<small>{{DerefMediaWidth}}x{{DerefMediaHeight}}</small>
 				</p>

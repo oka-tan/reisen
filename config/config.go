@@ -18,8 +18,10 @@ type Config struct {
 }
 
 type BoardConfig struct {
-	Name        string
-	Description string
+	Name         string
+	Description  string
+	EnableLatex  bool
+	EnableTegaki bool
 }
 
 type PostgresConfig struct {
@@ -69,4 +71,24 @@ func LoadConfig() Config {
 	}
 
 	return conf
+}
+
+func (c *Config) IsLatexEnabled(board string) bool {
+	for _, b := range c.Boards {
+		if b.Name == board && b.EnableLatex {
+			return true
+		}
+	}
+
+	return false
+}
+
+func (c *Config) IsTegakiEnabled(board string) bool {
+	for _, b := range c.Boards {
+		if b.Name == board && b.EnableTegaki {
+			return true
+		}
+	}
+
+	return false
 }

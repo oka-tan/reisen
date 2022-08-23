@@ -54,6 +54,8 @@ func BoardThread(pg *bun.DB, conf config.Config) func(echo.Context) error {
 			"threadNumber": threadNumber,
 			"op":           thread[0],
 			"thread":       thread[1:],
+			"enableLatex":  conf.IsLatexEnabled(board),
+			"enableTegaki": conf.IsTegakiEnabled(board),
 		}
 
 		return c.Render(http.StatusOK, "board-thread", model)

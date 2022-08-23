@@ -108,6 +108,8 @@ func BoardSearch(pg *bun.DB, lnxService lnx.Service, conf config.Config) func(ec
 			"offset":             offset,
 			"nextPageOffset":     nextPageOffset,
 			"previousPageOffset": previousPageOffset,
+			"enableLatex":        conf.IsLatexEnabled(board),
+			"enableTegaki":       conf.IsTegakiEnabled(board),
 		})
 	}
 }

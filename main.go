@@ -38,6 +38,7 @@ func main() {
 	e.Use(middleware.Gzip())
 
 	e.File("/favicon.ico", "static/favicon.ico", CacheControlHeader)
+	e.File("/robots.txt", "static/robots.txt")
 	e.Group("/static", CacheControlHeader).Static("/", "static")
 
 	e.GET("/", handlers.Index(pg, conf))

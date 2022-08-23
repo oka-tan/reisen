@@ -1,0 +1,8 @@
+User-agent: *
+
+Disallow: /static
+Disallow: /*/search
+Disallow: /*/view-same
+Disallow: /*/post
+Disallow: /*?rkeyset=
+Allow: /

@@ -12,6 +12,8 @@ window.addEventListener('load', function(event) {
 	const toggleRegex = /^toggle\('.*'\)$/;
 	const board = document.documentElement.getAttribute('data-board');
 	const oekakiUrl = document.documentElement.getAttribute('data-oekaki-url');
+	const enableLatex = document.documentElement.getAttribute('data-enable-latex') === 'true';
+	const enableTegaki = document.documentElement.getAttribute('data-enable-tegaki') === 'true';
 	const themeSelect = document.getElementById('theme-select');
 
 	//Doing stuff proper
@@ -57,23 +59,25 @@ window.addEventListener('load', function(event) {
 				}
 			} else if (aElement.href.substring(0, 19) === 'javascript:oeReplay') {
 				//Fix oekaki links
-				const oekakiInternalHash = reisenPost.getAttribute('data-oekaki-internal-hash');
-				//Point the href to the post element for convenience
-				aElement.href = '#' + reisenPost.id;
+				if (enableTegaki) {
+					const oekakiInternalHash = reisenPost.getAttribute('data-oekaki-internal-hash');
+					//Point the href to the post element for convenience
+					aElement.href = '#' + reisenPost.id;
 
-				if (oekakiInternalHash) {
-					//We need to do this song and dance
-					//to inject the hash because of the for loop
-					aElement.onclick = function(oekakiInternalHash) {
-						return function() {
-							Tegaki.open({
-								replayMode: true,
-								replayURL: `${oekakiUrl}/${oekakiInternalHash}`
-							});
-						}
-					}(oekakiInternalHash);
-				} else {
-					aElement.textContent += ' (Unavailable)';
+					if (oekakiInternalHash) {
+						//We need to do this song and dance
+						//to inject the hash because of the for loop
+						aElement.onclick = function(oekakiInternalHash) {
+							return function() {
+								Tegaki.open({
+									replayMode: true,
+									replayURL: `${oekakiUrl}/${oekakiInternalHash}`
+								});
+							}
+						}(oekakiInternalHash);
+					} else {
+						aElement.textContent += ' (Unavailable)';
+					}
 				}
 			} else if (aElement.getAttribute('onclick')) {
 				//The href is something like 'javascript:void(0)',
@@ -134,8 +138,11 @@ window.addEventListener('load', function(event) {
 
 
 	//Mathjax configuration
-	MathJax.Hub.Config({
-		tex2jax: {inlineMath: [['[math]','[/math]'], ['[eqn]','[/eqn]']]}
-	});
+	if (enableLatex) {
+		console.log('Enabling latex');
+		MathJax.Hub.Config({
+			tex2jax: {inlineMath: [['[math]','[/math]'], ['[eqn]','[/eqn]']]}
+		});
+	}
 });
 

@@ -82,12 +82,14 @@ func BoardViewSame(pg *bun.DB, conf config.Config) func(echo.Context) error {
 		}
 
 		model := map[string]interface{}{
-			"boards":  conf.Boards,
-			"conf":    conf.TemplateConfig,
-			"board":   board,
-			"posts":   posts,
-			"keyset":  keyset,
-			"rkeyset": rkeyset,
+			"boards":       conf.Boards,
+			"conf":         conf.TemplateConfig,
+			"board":        board,
+			"posts":        posts,
+			"keyset":       keyset,
+			"rkeyset":      rkeyset,
+			"enableLatex":  conf.IsLatexEnabled(board),
+			"enableTegaki": conf.IsTegakiEnabled(board),
 		}
 
 		return c.Render(http.StatusOK, "board-view-same", model)
