@@ -17,7 +17,7 @@
 	<head>
 		<meta charset="UTF-8">
 		{{#description}}
-			<meta name="description" content="Eientei 4chan Archive {{description}}">
+			<meta name="description" content="Eientei 4chan Archive {{{description}}}">
 		{{/description}}
 		{{^description}}
 			{{#board}}
@@ -38,7 +38,7 @@
 			{{#board}}
 				- /{{board}}/
 			{{/board}}
-			{{#title}} {{title}} {{/title}}
+			{{#title}} {{{title}}} {{/title}}
 		</title>
 		{{#enableLatex}}
 			<script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js?config=TeX-AMS_HTML-full"></script>
