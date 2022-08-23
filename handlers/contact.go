@@ -11,8 +11,10 @@ import (
 func Contact(pg *bun.DB, conf config.Config) func(c echo.Context) error {
 	return func(c echo.Context) error {
 		model := map[string]interface{}{
-			"boards": conf.Boards,
-			"conf":   conf.TemplateConfig,
+			"boards":      conf.Boards,
+			"conf":        conf.TemplateConfig,
+			"title":       "Contact",
+			"description": "Contact",
 		}
 
 		return c.Render(http.StatusOK, "contact", model)

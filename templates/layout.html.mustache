@@ -16,15 +16,29 @@
 >
 	<head>
 		<meta charset="UTF-8">
-		<meta name="description" content="Eientei 4chan {{board}} Archive">
+		{{#description}}
+			<meta name="description" content="Eientei 4chan Archive {{description}}">
+		{{/description}}
+		{{^description}}
+			{{#board}}
+				<meta name="description" content="Eientei 4chan Archive /{{board}}/">
+			{{/board}}
+			{{^board}}
+				<meta name="description" content="Eientei 4chan Archive">
+			{{/board}}
+		{{/description}}
+		{{#noIndex}}
+			<meta name="robots" content="noindex">
+		{{/noIndex}}
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<link rel="stylesheet" id="main-css-link" href="{{conf.DefaultTheme.Url}}"/>
 		<link rel="icon" href="{{conf.FaviconUrl}}"/>
 		<title>
-			Eientei Archive
+			Eientei
 			{{#board}}
 				- /{{board}}/
 			{{/board}}
+			{{#title}} {{title}} {{/title}}
 		</title>
 		{{#enableLatex}}
 			<script async src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.6.1/MathJax.js?config=TeX-AMS_HTML-full"></script>

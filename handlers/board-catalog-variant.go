@@ -33,17 +33,19 @@ func BoardCatalogVariant(pg *bun.DB, conf config.Config) func(echo.Context) erro
 
 		if err != nil {
 			return c.Render(http.StatusInternalServerError, "board-error", map[string]interface{}{
-				"boards": conf.Boards,
-				"conf":   conf.TemplateConfig,
-				"board":  board,
+				"boards":  conf.Boards,
+				"conf":    conf.TemplateConfig,
+				"board":   board,
+				"noIndex": true,
 			})
 		}
 
 		if len(threads) == 0 {
 			return c.Render(http.StatusNoContent, "board-empty", map[string]interface{}{
-				"boards": conf.Boards,
-				"conf":   conf.TemplateConfig,
-				"board":  board,
+				"boards":  conf.Boards,
+				"conf":    conf.TemplateConfig,
+				"board":   board,
+				"noIndex": true,
 			})
 		}
 
@@ -83,6 +85,7 @@ func BoardCatalogVariant(pg *bun.DB, conf config.Config) func(echo.Context) erro
 			"rkeyset":      rkeyset,
 			"enableLatex":  conf.IsLatexEnabled(board),
 			"enableTegaki": conf.IsTegakiEnabled(board),
+			"noIndex":      true,
 		}
 
 		return c.Render(http.StatusOK, "board-catalog-variant", model)

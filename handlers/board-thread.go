@@ -2,6 +2,7 @@ package handlers
 
 import (
 	"context"
+	"fmt"
 	"net/http"
 	"reisen/config"
 	"reisen/db"
@@ -31,6 +32,7 @@ func BoardThread(pg *bun.DB, conf config.Config) func(echo.Context) error {
 				"boards":       conf.Boards,
 				"conf":         conf.TemplateConfig,
 				"threadNumber": threadNumber,
+				"noIndex":      true,
 			}
 
 			return c.Render(http.StatusOK, "board-thread-error", model)
@@ -42,9 +44,23 @@ func BoardThread(pg *bun.DB, conf config.Config) func(echo.Context) error {
 				"boards":       conf.Boards,
 				"conf":         conf.TemplateConfig,
 				"threadNumber": threadNumber,
+				"noIndex":      true,
 			}
 
 			return c.Render(http.StatusOK, "board-thread-not-found", model)
+		}
+
+		var title string
+		var description string
+		if thread[0].Subject != nil {
+			title = fmt.Sprintf("%d - %s", threadNumber, *thread[0].Subject)
+			description = fmt.Sprintf("/%s/ %d - %s", board, threadNumber, *thread[0].Subject)
+		} else if thread[0].Comment != nil {
+			title = fmt.Sprintf("%d - %s", threadNumber, truncate(*thread[0].Comment, 20))
+			description = fmt.Sprintf("/%s/ %d - %s", board, threadNumber, *thread[0].Comment)
+		} else {
+			title = fmt.Sprintf("%d - Untitled Thread", threadNumber)
+			description = fmt.Sprintf("/%s/ %d - Untitled Thread", board, threadNumber)
 		}
 
 		model := map[string]interface{}{
@@ -56,8 +72,18 @@ func BoardThread(pg *bun.DB, conf config.Config) func(echo.Context) error {
 			"thread":       thread[1:],
 			"enableLatex":  conf.IsLatexEnabled(board),
 			"enableTegaki": conf.IsTegakiEnabled(board),
+			"title":        title,
+			"description":  description,
 		}
 
 		return c.Render(http.StatusOK, "board-thread", model)
+	}
+}
+
+func truncate(s string, max int) string {
+	if len(s) < max {
+		return s
+	} else {
+		return s[:max]
 	}
 }
