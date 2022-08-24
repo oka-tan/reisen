@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"os"
 	"reisen/config"
 	"strings"
@@ -20,8 +19,6 @@ func robots(conf config.Config) {
 		fmt.Fprintf(&b, "/%s/post\n", name)
 		fmt.Fprintf(&b, "/%s?rkeyset=\n", name)
 	}
-
-	log.Println(b.String())
 
 	robotsTxt, err := os.Create("static/robots.txt")
 	if err != nil {
