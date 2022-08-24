@@ -14,10 +14,10 @@ func robots(conf config.Config) {
 	for _, board := range conf.Boards {
 		name := board.Name
 
-		fmt.Fprintf(&b, "/%s/search\n", name)
-		fmt.Fprintf(&b, "/%s/view-same\n", name)
-		fmt.Fprintf(&b, "/%s/post\n", name)
-		fmt.Fprintf(&b, "/%s?rkeyset=\n", name)
+		fmt.Fprintf(&b, "Disallow: /%s/search\n", name)
+		fmt.Fprintf(&b, "Disallow: /%s/view-same\n", name)
+		fmt.Fprintf(&b, "Disallow: /%s/post\n", name)
+		fmt.Fprintf(&b, "Disallow: /%s?rkeyset=\n", name)
 	}
 
 	robotsTxt, err := os.Create("static/robots.txt")
