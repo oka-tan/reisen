@@ -5,6 +5,18 @@ if (window.localStorage.getItem('themeUrl') !== null) {
 	linkElement.href = themeUrl;
 }
 
+//MathJax configuration
+if (document.documentElement.getAttribute('data-enable-latex') === 'true') {
+	window.MathJax = {
+		tex: {
+			inlineMath: [['[math]', '[/math]'], ['[eqn]', '[/eqn]']]
+		},
+		svg: {
+			fontCache: 'global'
+		}
+	};
+}
+
 //Load event. Most of the code is in here
 window.addEventListener('load', function(event) {
 	//Global variables
@@ -12,7 +24,6 @@ window.addEventListener('load', function(event) {
 	const toggleRegex = /^toggle\('.*'\)$/;
 	const board = document.documentElement.getAttribute('data-board');
 	const oekakiUrl = document.documentElement.getAttribute('data-oekaki-url');
-	const enableLatex = document.documentElement.getAttribute('data-enable-latex') === 'true';
 	const enableTegaki = document.documentElement.getAttribute('data-enable-tegaki') === 'true';
 	const themeSelect = document.getElementById('theme-select');
 
@@ -134,15 +145,6 @@ window.addEventListener('load', function(event) {
 				break;
 			}
 		}
-	}
-
-
-	//Mathjax configuration
-	if (enableLatex) {
-		console.log('Enabling latex');
-		MathJax.Hub.Config({
-			tex2jax: {inlineMath: [['[math]','[/math]'], ['[eqn]','[/eqn]']]}
-		});
 	}
 });
 

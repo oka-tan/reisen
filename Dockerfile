@@ -17,6 +17,8 @@ RUN adduser --disabled-password --no-create-home reisen
 COPY --from=build /app/reisen .
 COPY --from=build /app/templates templates
 COPY --from=build /app/static static
+RUN chown -R reisen:reisen /app/static
 
 USER reisen
+
 CMD ./reisen
