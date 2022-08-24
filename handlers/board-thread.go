@@ -53,11 +53,10 @@ func BoardThread(pg *bun.DB, conf config.Config) func(echo.Context) error {
 		var title string
 		var description string
 		if thread[0].Subject != nil {
-			title = fmt.Sprintf("%d - %s", threadNumber, *thread[0].Subject)
-			description = fmt.Sprintf("/%s/ %d - %s", board, threadNumber, *thread[0].Subject)
-		} else if thread[0].Comment != nil {
-			title = fmt.Sprintf("%d - %s", threadNumber, truncate(*thread[0].Comment, 20))
-			description = fmt.Sprintf("/%s/ %d - %s", board, threadNumber, *thread[0].Comment)
+			subject := *thread[0].Subject
+
+			title = fmt.Sprintf("%d - %s", threadNumber, subject)
+			description = fmt.Sprintf("/%s/ %d - %s", board, threadNumber, subject)
 		} else {
 			title = fmt.Sprintf("%d - Untitled Thread", threadNumber)
 			description = fmt.Sprintf("/%s/ %d - Untitled Thread", board, threadNumber)
