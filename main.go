@@ -18,6 +18,7 @@ import (
 func main() {
 	conf := config.LoadConfig()
 
+	robots(conf)
 	sqlpg := sql.OpenDB(pgdriver.NewConnector(pgdriver.WithDSN(conf.PostgresConfig.ConnectionString)))
 	pg := bun.NewDB(sqlpg, pgdialect.New())
 
