@@ -6,7 +6,8 @@ if (window.localStorage.getItem('themeUrl') !== null) {
 }
 
 //MathJax configuration
-if (document.documentElement.getAttribute('data-enable-latex') === 'true') {
+const enableLatex = document.documentElement.getAttribute('data-enable-latex') === 'true';
+if (enableLatex) {
 	window.MathJax = {
 		tex: {
 			inlineMath: [['[math]', '[/math]'], ['[eqn]', '[/eqn]']]
@@ -132,6 +133,12 @@ window.addEventListener('load', function(event) {
 				window.localStorage.setItem('themeUrl', optionElement.value);
 				linkElement.href = optionElement.value;
 			}
+		}
+	}
+
+	if (enableLatex) {
+		for (const wbr of document.getElementsByTagName('wbr')) {
+			wbr.parentNode.removeChild(wbr);
 		}
 	}
 
