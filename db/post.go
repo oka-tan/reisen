@@ -63,7 +63,7 @@ func (p *Post) FormatName() string {
 }
 
 func (p *Post) FormatTime() string {
-	return p.TimePosted.Format("Mon 2 Jan 2006 15:04:05")
+	return p.TimePosted.UTC().Format("Mon 2 Jan 2006 15:04:05")
 }
 
 func (p *Post) SubjectIsNil() bool {
