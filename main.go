@@ -2,6 +2,7 @@ package main
 
 import (
 	"database/sql"
+	"fmt"
 	"reisen/config"
 	"reisen/handlers"
 	"reisen/lnx"
@@ -60,7 +61,7 @@ func main() {
 	e.GET("/:board/view-same/:media_4chan_hash", handlers.BoardViewSame(pg, conf))
 	e.GET("/:board/mooch-image/:post_number", handlers.MoochImage(pg, conf))
 
-	e.Logger.Fatal(e.Start(":1323"))
+	e.Logger.Fatal(e.Start(fmt.Sprintf(":%d", conf.Port)))
 }
 
 func cacheControlHeader(next echo.HandlerFunc) echo.HandlerFunc {

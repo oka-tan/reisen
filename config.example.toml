@@ -1,0 +1,62 @@
+#content-security Policy to be injected in every response
+csp = """
+default-src 'self' http://s3.localhost;
+style-src 'unsafe-inline' 'self';
+script-src 'self' https://cdn.jsdelivr.net/npm/mathjax@3.0.1/es5/tex-mml-chtml.js;
+font-src https://cdn.jsdelivr.net data:;
+"""
+
+#port reisen listens on
+port = 1323
+
+[postgres]
+#bun postgres connection string
+connection_string = "postgres://postgres:12345678@postgres:5432/postgres?sslmode=disable"
+
+[lnx]
+#host lnx is listening on
+host = "http://lnx"
+#port lnx is listening on
+port = 8000
+
+#boards to be displayed
+[[boards]]
+name = "i"
+#description shown in the index page
+description = "Oekaki"
+
+#configuration directly injected when templating html
+[template]
+#url where images are hosted
+images_url = "http://s3.localhost/ayase"
+#url where thumbnails are hosted
+thumbnails_url = "http://s3.localhost/ayase"
+#url where tegaki replay files are hosted
+oekaki_url = "http://s3.localhost/ayase"
+#url with favicon
+favicon_url = "/favicon.ico"
+#url with reisen's main js file
+js_url = "/static/reisen.js"
+#url with the tegaki js file
+tegaki_js_url = "/static/tegaki.min.js"
+#url with the tegaki css file
+tegaki_css_url = "/static/tegaki.css"
+
+#reisen themes
+[[template.themes]]
+#name displayed to users
+name = "Reisen Default Theme"
+#url where the theme is available
+url = "/static/reisen.css"
+
+[[template.themes]]
+name = "Reisen Tibix Theme"
+url = "/static/reisen-tibix.css"
+
+[[template.themes]]
+name = "Reisen RBT Theme"
+url = "/static/reisen-rbt.css"
+
+[template.default_theme]
+name = "Reisen Default Theme"
+url = "/static/reisen.css"

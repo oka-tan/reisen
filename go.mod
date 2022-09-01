@@ -12,6 +12,7 @@ require (
 )
 
 require (
+	github.com/BurntSushi/toml v1.2.0 // indirect
 	github.com/golang-jwt/jwt v3.2.2+incompatible // indirect
 	github.com/jinzhu/inflection v1.0.0 // indirect
 	github.com/mattn/go-colorable v0.1.11 // indirect

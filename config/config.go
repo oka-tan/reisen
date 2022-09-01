@@ -1,61 +1,61 @@
 package config
 
 import (
-	"encoding/json"
 	"log"
 	"os"
+
+	"github.com/BurntSushi/toml"
 )
 
 type Config struct {
-	PostgresConfig    PostgresConfig
-	LnxConfig         LnxConfig
-	Boards            []BoardConfig
-	CspConfig         string
-	TemplateConfig    TemplateConfig
-	Hosts             []string
-	Production        bool
-	UseCatalogVariant bool
+	PostgresConfig    PostgresConfig `toml:"postgres"`
+	LnxConfig         LnxConfig      `toml:"lnx"`
+	Boards            []BoardConfig  `toml:"boards"`
+	CspConfig         string         `toml:"csp"`
+	TemplateConfig    TemplateConfig `toml:"template"`
+	UseCatalogVariant bool           `toml:"use_catalog_variant"`
+	Port              int            `toml:"port"`
 }
 
 type BoardConfig struct {
-	Name         string
-	Description  string
-	EnableLatex  bool
-	EnableTegaki bool
+	Name         string `toml:"name"`
+	Description  string `toml:"description"`
+	EnableLatex  bool   `toml:"enable_latex"`
+	EnableTegaki bool   `toml:"enable_tegaki"`
 }
 
 type PostgresConfig struct {
-	ConnectionString string
+	ConnectionString string `toml:"connection_string"`
 }
 
 type LnxConfig struct {
-	Host string
-	Port int
+	Host string `toml:"host"`
+	Port int    `toml:"port"`
 }
 
 type TemplateConfig struct {
-	ImagesUrl     string
-	ThumbnailsUrl string
-	OekakiUrl     string
-	FaviconUrl    string
-	BaseCssUrl    string
-	JsUrl         string
-	TegakiJsUrl   string
-	TegakiCssUrl  string
-	Themes        []Theme
-	DefaultTheme  Theme
+	ImagesUrl     string  `toml:"images_url"`
+	ThumbnailsUrl string  `toml:"thumbnails_url"`
+	OekakiUrl     string  `toml:"oekaki_url"`
+	FaviconUrl    string  `toml:"favicon_url"`
+	BaseCssUrl    string  `toml:"base_css_url"`
+	JsUrl         string  `toml:"js_url"`
+	TegakiJsUrl   string  `toml:"tegaki_js_url"`
+	TegakiCssUrl  string  `toml:"tegaki_css_url"`
+	Themes        []Theme `toml:"themes"`
+	DefaultTheme  Theme   `toml:"default_theme"`
 }
 
 type Theme struct {
-	Name string
-	Url  string
+	Name string `toml:"name"`
+	Url  string `toml:"url"`
 }
 
 func LoadConfig() Config {
 	configFile := os.Getenv("REISEN_CONFIG")
 
 	if configFile == "" {
-		configFile = "./config.json"
+		configFile = "./config.toml"
 	}
 
 	f, err := os.Open(configFile)
@@ -66,7 +66,7 @@ func LoadConfig() Config {
 
 	var conf Config
 
-	if err := json.NewDecoder(f).Decode(&conf); err != nil {
+	if _, err := toml.NewDecoder(f).Decode(&conf); err != nil {
 		log.Fatalln(err)
 	}
 
