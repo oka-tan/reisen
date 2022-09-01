@@ -14,7 +14,7 @@ docker-compose.yml
 #Junk
 README.md
 LICENSE
-config.json
-config.example.json
+config.toml
+config.example.toml
 shell.nix
 reisen
