@@ -18,8 +18,10 @@
 See config.example.toml and follow along with the comments
 
 Reisen will look for a configuration file
+
 - wherever the environment variable `REISEN_CONFIG` says a file is
 - at ./config.toml wherever you started reisen from
+
 in that order
 
 ## Deployment
