@@ -7,7 +7,10 @@ import (
 	"strings"
 )
 
+//Generates robots.txt
 func robots(conf config.Config) {
+	//We build the robots.txt as an in-memory string beforehand
+	//so we can minimize IO errors we need to handle
 	var b strings.Builder
 	b.WriteString("User-agent: *\n")
 

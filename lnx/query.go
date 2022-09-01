@@ -1,5 +1,5 @@
 package lnx
 
-type Query struct {
-	Normal NormalQuery `json:"normal"`
+type query struct {
+	Normal normalQuery `json:"normal"`
 }

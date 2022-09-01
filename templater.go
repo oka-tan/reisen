@@ -8,7 +8,7 @@ import (
 	"github.com/labstack/echo/v4"
 )
 
-type Templater struct {
+type templater struct {
 	layout    *mustache.Template
 	templates map[string]*mustache.Template
 }
@@ -23,7 +23,7 @@ func mustCompile(filename string, partials mustache.PartialProvider) *mustache.T
 	return template
 }
 
-func NewTemplater() *Templater {
+func newTemplater() *templater {
 	fileProvider := &mustache.FileProvider{
 		Paths:      []string{"templates/"},
 		Extensions: []string{".html.mustache-partial"},
@@ -52,13 +52,13 @@ func NewTemplater() *Templater {
 		"search-reference":              mustCompile("templates/search-reference.html.mustache", fileProvider),
 	}
 
-	return &Templater{
+	return &templater{
 		layout:    layout,
 		templates: templates,
 	}
 }
 
 //Render implements a method echo needs for template rendering.
-func (t *Templater) Render(w io.Writer, name string, data interface{}, c echo.Context) error {
+func (t *templater) Render(w io.Writer, name string, data interface{}, c echo.Context) error {
 	return t.templates[name].FRenderInLayout(w, t.layout, data)
 }

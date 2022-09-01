@@ -12,6 +12,7 @@ import (
 	"github.com/uptrace/bun"
 )
 
+//BoardPost redirects to the thread containing the post
 func BoardPost(pg *bun.DB, conf config.Config) func(echo.Context) error {
 	return func(c echo.Context) error {
 		board := c.Param("board")

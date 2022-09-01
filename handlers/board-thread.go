@@ -12,6 +12,7 @@ import (
 	"github.com/uptrace/bun"
 )
 
+//BoardThread prints out a thread
 func BoardThread(pg *bun.DB, conf config.Config) func(echo.Context) error {
 	return func(c echo.Context) error {
 		board := c.Param("board")
@@ -35,7 +36,7 @@ func BoardThread(pg *bun.DB, conf config.Config) func(echo.Context) error {
 				"noIndex":      true,
 			}
 
-			return c.Render(http.StatusOK, "board-thread-error", model)
+			return c.Render(http.StatusInternalServerError, "board-thread-error", model)
 		}
 
 		if len(thread) == 0 {
@@ -47,7 +48,7 @@ func BoardThread(pg *bun.DB, conf config.Config) func(echo.Context) error {
 				"noIndex":      true,
 			}
 
-			return c.Render(http.StatusOK, "board-thread-not-found", model)
+			return c.Render(http.StatusNotFound, "board-thread-not-found", model)
 		}
 
 		var title string
@@ -82,7 +83,6 @@ func BoardThread(pg *bun.DB, conf config.Config) func(echo.Context) error {
 func truncate(s string, max int) string {
 	if len(s) < max {
 		return s
-	} else {
-		return s[:max]
 	}
+	return s[:max]
 }

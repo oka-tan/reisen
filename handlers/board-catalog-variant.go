@@ -1,3 +1,8 @@
+//Package handlers contains all request handlers in reisen.
+//
+//Since golang dislikes dependency injection
+//they're all functions taking a couple of dependencies (
+//the db connection, etc) and returning the handler function proper.
 package handlers
 
 import (
@@ -11,6 +16,9 @@ import (
 	"github.com/uptrace/bun"
 )
 
+//BoardCatalogVariant is the catalog-like variant
+//of the index page.
+//The "default" variant hasn't been made yet
 func BoardCatalogVariant(pg *bun.DB, conf config.Config) func(echo.Context) error {
 	return func(c echo.Context) error {
 		board := c.Param("board")

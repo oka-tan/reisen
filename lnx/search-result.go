@@ -1,19 +1,19 @@
 package lnx
 
-type SearchResult struct {
-	Data SearchResultData `json:"data"`
+type searchResult struct {
+	Data searchResultData `json:"data"`
 }
 
-type SearchResultData struct {
-	Hits  []Hit `json:"hits"`
+type searchResultData struct {
+	Hits  []hit `json:"hits"`
 	Count int   `json:"count"`
 }
 
-type Hit struct {
-	Doc Doc `json:"doc"`
+type hit struct {
+	Doc doc `json:"doc"`
 }
 
-type Doc struct {
+type doc struct {
 	PostNumber int64 `json:"post_number"`
 }
 

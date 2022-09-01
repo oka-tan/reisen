@@ -1,3 +1,5 @@
+//Package db provides entities and methods
+//for database access
 package db
 
 import (
@@ -54,50 +56,74 @@ type Post struct {
 	OekakiInternalHash    *[]byte    `bun:"oekaki_internal_hash"`
 }
 
+//We need all of these goofy methods
+//because of how mustache works
+
+//FormatName returns the user name
+//when a name is available on the db
+//and 'Anonymous' otherwise
 func (p *Post) FormatName() string {
 	if p.Name != nil {
 		return *p.Name
-	} else {
-		return "Anonymous"
 	}
+	return "Anonymous"
 }
 
+//FormatTime formats the post time
+//as a string
 func (p *Post) FormatTime() string {
 	return p.TimePosted.UTC().Format("Mon 2 Jan 2006 15:04:05")
 }
 
+//SubjectIsNil returns a boolean indicating
+//whether the Subject field is nil or not
 func (p *Post) SubjectIsNil() bool {
 	return p.Subject == nil
 }
 
+//DerefSubject derefs the subject field
+//to return a string
 func (p *Post) DerefSubject() string {
 	return *(p.Subject)
 }
 
+//CommentIsNil returns a boolean indicating
+//whether or not the comment field is nil
 func (p *Post) CommentIsNil() bool {
 	return p.Comment == nil
 }
 
+//DerefComment derefs the post comment field
+//to return a string
 func (p *Post) DerefComment() string {
 	return *(p.Comment)
 }
 
+//DerefThumbnailWidth derefs the thumbnail width
+//field
 func (p *Post) DerefThumbnailWidth() int16 {
 	return *(p.ThumbnailWidth)
 }
 
+//DerefThumbnailHeight derefs the thumbnail height
+//field
 func (p *Post) DerefThumbnailHeight() int16 {
 	return *(p.ThumbnailHeight)
 }
 
+//DerefMediaWidth derefs the media width
+//field
 func (p *Post) DerefMediaWidth() int16 {
 	return *(p.MediaWidth)
 }
 
+//DerefMediaHeight derefs the media height
+//field
 func (p *Post) DerefMediaHeight() int16 {
 	return *(p.MediaHeight)
 }
 
+//DerefMediaFileName derefs the media file name
 func (p *Post) DerefMediaFileName() string {
 	if p.MediaFileName == nil {
 		return ""
@@ -106,6 +132,8 @@ func (p *Post) DerefMediaFileName() string {
 	return *(p.MediaFileName)
 }
 
+//DerefMediaFileNameShort derefs the media file
+//name field and truncates it for diplay purposes
 func (p *Post) DerefMediaFileNameShort() string {
 	if p.MediaFileName == nil {
 		return ""
@@ -127,42 +155,66 @@ func (p *Post) DerefMediaFileNameShort() string {
 	return fmt.Sprintf("%s...", string(runes[:17]))
 }
 
+//MediaTimestampIsNil returns a boolean
+//indicating whether or not the media timestamp
+//field is nil
 func (p *Post) MediaTimestampIsNil() bool {
 	return p.MediaTimestamp == nil
 }
 
+//DerefMediaTimestamp derefs the media timestamp
+//field
 func (p *Post) DerefMediaTimestamp() int64 {
 	return *(p.MediaTimestamp)
 }
 
+//DerefMediaExtension derefs the media extension
+//field
 func (p *Post) DerefMediaExtension() string {
 	return *(p.MediaExtension)
 }
 
+//DerefThumbnailInternalHash derefs the thumbnail
+//internal hash field
 func (p *Post) DerefThumbnailInternalHash() string {
 	return base64.URLEncoding.EncodeToString(*(p.ThumbnailInternalHash))
 }
 
+//DerefMediaInternalHash derefs the media internal
+//hash field
 func (p *Post) DerefMediaInternalHash() string {
 	return base64.URLEncoding.EncodeToString(*(p.MediaInternalHash))
 }
 
+//DerefMedia4chanHash derefs the media 4chan hash
+//field
 func (p *Post) DerefMedia4chanHash() string {
 	return base64.URLEncoding.EncodeToString(*(p.Media4chanHash))
 }
 
+//MediaAvailable returns a boolean indicating whether
+//a post's media has been downloaded and is available
+//for download by users
 func (p *Post) MediaAvailable() bool {
 	return p.MediaInternalHash != nil
 }
 
+//ThumbnailAvailable returns a boolean indicating whether
+//a post's thumbnail has been downloaded and is available
+//for visualization by users
 func (p *Post) ThumbnailAvailable() bool {
 	return p.ThumbnailInternalHash != nil
 }
 
+//OekakiAvailable returns a boolean indicating whether
+//a post has a tegaki replay, it has been downloaded and
+//it is available for visualization by users
 func (p *Post) OekakiAvailable() bool {
 	return p.OekakiInternalHash != nil
 }
 
+//DerefOekakiInternalHash derefs the oekaki internal
+//hash field
 func (p *Post) DerefOekakiInternalHash() string {
 	return base64.URLEncoding.EncodeToString(*(p.OekakiInternalHash))
 }

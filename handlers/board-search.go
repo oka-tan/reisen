@@ -15,6 +15,7 @@ import (
 	"github.com/uptrace/bun"
 )
 
+//BoardSearch is the regular search endpoint
 func BoardSearch(pg *bun.DB, lnxService lnx.Service, conf config.Config) func(echo.Context) error {
 	return func(c echo.Context) error {
 		board := c.Param("board")

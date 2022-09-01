@@ -1,5 +1,5 @@
 package lnx
 
-type NormalQuery struct {
+type normalQuery struct {
 	Ctx string `json:"ctx"`
 }

@@ -1,3 +1,4 @@
+//Package lnx wraps access to lnx
 package lnx
 
 import (
@@ -8,21 +9,24 @@ import (
 	"net/http"
 )
 
+//Service wraps access to lnx
 type Service struct {
 	host   string
 	client http.Client
 }
 
+//NewService builds a Service
 func NewService(host string, port int) Service {
 	return Service{
 		host: fmt.Sprintf("%s:%d", host, port),
 	}
 }
 
+//Search searches lnx for posts
 func (s *Service) Search(board string, ctx string, offset int) (CondensedSearchResult, error) {
-	search := Search{
-		Query: Query{
-			Normal: NormalQuery{Ctx: ctx},
+	se := search{
+		Query: query{
+			Normal: normalQuery{Ctx: ctx},
 		},
 		Offset:  offset,
 		OrderBy: "post_number",
@@ -33,7 +37,7 @@ func (s *Service) Search(board string, ctx string, offset int) (CondensedSearchR
 
 	go func() {
 		encoder := json.NewEncoder(pipeWriter)
-		err := encoder.Encode(&search)
+		err := encoder.Encode(&se)
 		pipeWriter.CloseWithError(err)
 	}()
 
@@ -51,7 +55,7 @@ func (s *Service) Search(board string, ctx string, offset int) (CondensedSearchR
 		return CondensedSearchResult{}, err
 	}
 
-	var result SearchResult
+	var result searchResult
 	decoder := json.NewDecoder(resp.Body)
 	err = decoder.Decode(&result)
 	resp.Body.Close()

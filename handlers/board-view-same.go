@@ -12,6 +12,8 @@ import (
 	"github.com/uptrace/bun"
 )
 
+//BoardViewSame handles requests at the /:board/view-same/:hash endpoint
+//and lists out paginated posts with the given hash.
 func BoardViewSame(pg *bun.DB, conf config.Config) func(echo.Context) error {
 	return func(c echo.Context) error {
 		board := c.Param("board")
@@ -39,7 +41,7 @@ func BoardViewSame(pg *bun.DB, conf config.Config) func(echo.Context) error {
 			Scan(context.Background())
 
 		if err != nil {
-			return c.Render(http.StatusOK, "board-view-same-error", map[string]interface{}{
+			return c.Render(http.StatusInternalServerError, "board-view-same-error", map[string]interface{}{
 				"boards": conf.Boards,
 				"conf":   conf.TemplateConfig,
 				"board":  board,
@@ -47,7 +49,7 @@ func BoardViewSame(pg *bun.DB, conf config.Config) func(echo.Context) error {
 		}
 
 		if len(posts) == 0 {
-			return c.Render(http.StatusOK, "board-view-same-empty", map[string]interface{}{
+			return c.Render(http.StatusNotFound, "board-view-same-empty", map[string]interface{}{
 				"boards": conf.Boards,
 				"conf":   conf.TemplateConfig,
 				"board":  board,
