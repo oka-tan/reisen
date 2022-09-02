@@ -3,9 +3,11 @@ package main
 import (
 	"database/sql"
 	"fmt"
+	"net/http"
 	"reisen/config"
 	"reisen/handlers"
 	"reisen/lnx"
+	"strings"
 
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
@@ -45,15 +47,25 @@ func main() {
 		LogLevel:  gommon_log.ERROR,
 	}))
 
+	//GZIP compression
+	if conf.ForceGzip {
+		e.Use(forceGzip)
+	}
+
 	e.Use(middleware.Gzip())
 
-	e.File("/favicon.ico", "static/favicon.ico", cacheControlHeader)
-	e.File("/robots.txt", "static/robots.txt")
-	e.Group("/static", cacheControlHeader).Static("/", "static")
+	//If we're forcing gzip we can trim the "Vary: Accept-Encoding" header
+	if conf.ForceGzip {
+		e.Use(trimVaryHeader)
+	}
 
-	e.GET("/", handlers.Index(pg, conf))
-	e.GET("/contact", handlers.Contact(pg, conf))
-	e.GET("/search-reference", handlers.SearchReference(pg, conf))
+	e.File("/favicon.ico", "static/favicon.ico", cacheControlHeader(604800))
+	e.File("/robots.txt", "static/robots.txt")
+	e.Group("/static", cacheControlHeader(604800)).Static("/", "static")
+
+	e.GET("/", handlers.Index(pg, conf), cacheControlHeader(60))
+	e.GET("/contact", handlers.Contact(pg, conf), cacheControlHeader(60))
+	e.GET("/search-reference", handlers.SearchReference(pg, conf), cacheControlHeader(60))
 	e.GET("/:board", handlers.BoardCatalogVariant(pg, conf))
 	e.GET("/:board/thread/:thread_number", handlers.BoardThread(pg, conf))
 	e.GET("/:board/search", handlers.BoardSearch(pg, lnxService, conf))
@@ -64,9 +76,35 @@ func main() {
 	e.Logger.Fatal(e.Start(fmt.Sprintf(":%d", conf.Port)))
 }
 
-func cacheControlHeader(next echo.HandlerFunc) echo.HandlerFunc {
+func cacheControlHeader(maxAge int) echo.MiddlewareFunc {
+	cacheHeader := fmt.Sprintf("public, immutable, max-age=%d", maxAge)
+
+	return func(cacheHeader string) echo.MiddlewareFunc {
+		return func(next echo.HandlerFunc) echo.HandlerFunc {
+			return func(c echo.Context) error {
+				c.Response().Header().Set(echo.HeaderCacheControl, cacheHeader)
+				return next(c)
+			}
+		}
+	}(cacheHeader)
+}
+
+//Rejects requests without the Accept-Encoding header
+//explicitly saying it accepts GZIP
+func forceGzip(next echo.HandlerFunc) echo.HandlerFunc {
 	return func(c echo.Context) error {
-		c.Response().Header().Set(echo.HeaderCacheControl, "max-age=604800")
+		if !strings.Contains(c.Request().Header.Get(echo.HeaderAcceptEncoding), "gzip") {
+			return c.String(http.StatusBadRequest, "Requests must accept GZIP encoding")
+		}
+
+		return next(c)
+	}
+}
+
+//Removes the 'Vary' header from responses
+func trimVaryHeader(next echo.HandlerFunc) echo.HandlerFunc {
+	return func(c echo.Context) error {
+		c.Response().Header().Del(echo.HeaderVary)
 		return next(c)
 	}
 }

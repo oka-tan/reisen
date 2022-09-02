@@ -15,6 +15,7 @@ type Config struct {
 	TemplateConfig    TemplateConfig `toml:"template"`
 	UseCatalogVariant bool           `toml:"use_catalog_variant"`
 	Port              int            `toml:"port"`
+	ForceGzip         bool           `toml:"force_gzip"`
 }
 
 type BoardConfig struct {
