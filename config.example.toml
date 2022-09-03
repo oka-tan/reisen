@@ -9,6 +9,9 @@ font-src https://cdn.jsdelivr.net data:;
 #port reisen listens on
 port = 1323
 
+#rejects requests that don't accept gzip encoding
+force_gzip = true
+
 [postgres]
 #bun postgres connection string
 connection_string = "postgres://postgres:12345678@postgres:5432/postgres?sslmode=disable"
