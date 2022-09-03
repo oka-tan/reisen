@@ -27,6 +27,10 @@ port = 8000
 name = "i"
 #description shown in the index page
 description = "Oekaki"
+enable_tegaki = true
+enable_latex = false
+enable_country_flags = false
+enable_board_flags = false
 
 #configuration directly injected when templating html
 [template]
