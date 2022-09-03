@@ -77,10 +77,10 @@
 				No. {{PostNumber}}
 			</a>
 			{{#HasCountry}}
-				<i class="flag flag-{{DerefCountry}}"></i>
+				<i data-flag="{{DerefCountry}}" class="flag flag-{{DerefCountry}}"></i>
 			{{/HasCountry}}
 			{{#HasFlag}}
-				<i class="board-flag board-flag-{{DerefFlag}}"></i>
+				<i data-board-flag="{{DerefFlag}}" class="board-flag board-flag-{{DerefFlag}}"></i>
 			{{/HasFlag}}
 		</p>
 		{{^CommentIsNil}}

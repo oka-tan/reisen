@@ -37,16 +37,18 @@ type LnxConfig struct {
 }
 
 type TemplateConfig struct {
-	ImagesUrl     string  `toml:"images_url"`
-	ThumbnailsUrl string  `toml:"thumbnails_url"`
-	OekakiUrl     string  `toml:"oekaki_url"`
-	FaviconUrl    string  `toml:"favicon_url"`
-	BaseCssUrl    string  `toml:"base_css_url"`
-	JsUrl         string  `toml:"js_url"`
-	TegakiJsUrl   string  `toml:"tegaki_js_url"`
-	TegakiCssUrl  string  `toml:"tegaki_css_url"`
-	Themes        []Theme `toml:"themes"`
-	DefaultTheme  Theme   `toml:"default_theme"`
+	ImagesUrl       string  `toml:"images_url"`
+	ThumbnailsUrl   string  `toml:"thumbnails_url"`
+	OekakiUrl       string  `toml:"oekaki_url"`
+	FaviconUrl      string  `toml:"favicon_url"`
+	BaseCssUrl      string  `toml:"base_css_url"`
+	JsUrl           string  `toml:"js_url"`
+	TegakiJsUrl     string  `toml:"tegaki_js_url"`
+	TegakiCssUrl    string  `toml:"tegaki_css_url"`
+	FlagsJsUrl      string  `toml:"flags_js_url"`
+	BoardFlagsJsUrl string  `toml:"board_flags_js_url"`
+	Themes          []Theme `toml:"themes"`
+	DefaultTheme    Theme   `toml:"default_theme"`
 }
 
 type Theme struct {

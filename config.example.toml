@@ -48,6 +48,10 @@ js_url = "/static/reisen.js"
 tegaki_js_url = "/static/tegaki.min.js"
 #url with the tegaki css file
 tegaki_css_url = "/static/tegaki.css"
+#url with the flags js file
+flags_js_url = "/static/flags.js"
+#url with the board-flags js file
+board_flags_js_url = "/static/board-flags.js"
 
 #reisen themes
 [[template.themes]]

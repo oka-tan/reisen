@@ -49,9 +49,11 @@
 		{{/enableTegaki}}
 		{{#enableCountryFlags}}
 			<link rel="stylesheet" href="/static/flags.css">
+			<script async src="{{conf.FlagsJsUrl}}"></script>
 		{{/enableCountryFlags}}
 		{{#enableBoardFlags}}
 			<link rel="stylesheet" href="/static/board-flags.css">
+			<script async src="{{conf.BoardFlagsJsUrl}}"></script>
 		{{/enableBoardFlags}}
 		<script src="{{conf.JsUrl}}"></script>
 	</head>
