@@ -47,6 +47,12 @@
 			<link rel="stylesheet" href="{{conf.TegakiCssUrl}}">
 			<script async src="{{conf.TegakiJsUrl}}"></script>
 		{{/enableTegaki}}
+		{{#enableCountryFlags}}
+			<link rel="stylesheet" href="/static/flags.css">
+		{{/enableCountryFlags}}
+		{{#enableBoardFlags}}
+			<link rel="stylesheet" href="/static/board-flags.css">
+		{{/enableBoardFlags}}
 		<script src="{{conf.JsUrl}}"></script>
 	</head>
 	<body>

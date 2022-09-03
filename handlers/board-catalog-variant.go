@@ -85,15 +85,17 @@ func BoardCatalogVariant(pg *bun.DB, conf config.Config) func(echo.Context) erro
 		}
 
 		model := map[string]interface{}{
-			"boards":       conf.Boards,
-			"conf":         conf.TemplateConfig,
-			"board":        board,
-			"threads":      threads,
-			"keyset":       keyset,
-			"rkeyset":      rkeyset,
-			"enableLatex":  conf.IsLatexEnabled(board),
-			"enableTegaki": conf.IsTegakiEnabled(board),
-			"noIndex":      true,
+			"boards":             conf.Boards,
+			"conf":               conf.TemplateConfig,
+			"board":              board,
+			"threads":            threads,
+			"keyset":             keyset,
+			"rkeyset":            rkeyset,
+			"enableLatex":        conf.IsLatexEnabled(board),
+			"enableTegaki":       conf.IsTegakiEnabled(board),
+			"enableCountryFlags": conf.AreCountryFlagsEnabled(board),
+			"enableBoardFlags":   conf.AreBoardFlagsEnabled(board),
+			"noIndex":            true,
 		}
 
 		return c.Render(http.StatusOK, "board-catalog-variant", model)

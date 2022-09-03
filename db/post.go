@@ -5,6 +5,7 @@ package db
 import (
 	"encoding/base64"
 	"fmt"
+	"strings"
 	"time"
 
 	"github.com/uptrace/bun"
@@ -217,4 +218,28 @@ func (p *Post) OekakiAvailable() bool {
 //hash field
 func (p *Post) DerefOekakiInternalHash() string {
 	return base64.URLEncoding.EncodeToString(*(p.OekakiInternalHash))
+}
+
+//HasCountry returns a boolean indicating
+//whether or not a post specifies a country
+func (p *Post) HasCountry() bool {
+	return p.Country != nil
+}
+
+//DerefCountry derefs the country field
+//and lowercases it
+func (p *Post) DerefCountry() string {
+	return strings.ToLower(*(p.Country))
+}
+
+//HasFlag returns a boolean indicating
+//whether or not a post specifies a flag
+func (p *Post) HasFlag() bool {
+	return p.Flag != nil
+}
+
+//DerefFlag derefs the flag field
+//and lowercases it
+func (p *Post) DerefFlag() string {
+	return strings.ToLower(*(p.Flag))
 }

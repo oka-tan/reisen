@@ -19,10 +19,12 @@ type Config struct {
 }
 
 type BoardConfig struct {
-	Name         string `toml:"name"`
-	Description  string `toml:"description"`
-	EnableLatex  bool   `toml:"enable_latex"`
-	EnableTegaki bool   `toml:"enable_tegaki"`
+	Name               string `toml:"name"`
+	Description        string `toml:"description"`
+	EnableLatex        bool   `toml:"enable_latex"`
+	EnableTegaki       bool   `toml:"enable_tegaki"`
+	EnableCountryFlags bool   `toml:"enable_country_flags"`
+	EnableBoardFlags   bool   `toml:"enable_board_flags"`
 }
 
 type PostgresConfig struct {
@@ -76,8 +78,8 @@ func LoadConfig() Config {
 
 func (c *Config) IsLatexEnabled(board string) bool {
 	for _, b := range c.Boards {
-		if b.Name == board && b.EnableLatex {
-			return true
+		if b.Name == board {
+			return b.EnableLatex
 		}
 	}
 
@@ -86,8 +88,28 @@ func (c *Config) IsLatexEnabled(board string) bool {
 
 func (c *Config) IsTegakiEnabled(board string) bool {
 	for _, b := range c.Boards {
-		if b.Name == board && b.EnableTegaki {
-			return true
+		if b.Name == board {
+			return b.EnableTegaki
+		}
+	}
+
+	return false
+}
+
+func (c *Config) AreCountryFlagsEnabled(board string) bool {
+	for _, b := range c.Boards {
+		if b.Name == board {
+			return b.EnableCountryFlags
+		}
+	}
+
+	return false
+}
+
+func (c *Config) AreBoardFlagsEnabled(board string) bool {
+	for _, b := range c.Boards {
+		if b.Name == board {
+			return b.EnableBoardFlags
 		}
 	}
 

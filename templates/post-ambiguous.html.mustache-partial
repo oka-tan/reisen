@@ -84,6 +84,12 @@
 				<a href="/{{board}}/thread/{{ThreadNumber}}#p{{PostNumber}}">
 					No. {{PostNumber}}
 				</a>
+				{{#HasCountry}}
+					<i class="flag flag-{{DerefCountry}}"></i>
+				{{/HasCountry}}
+				{{#HasFlag}}
+					<i class="board-flag board-flag-{{DerefFlag}}"></i>
+				{{/HasFlag}}
 			</p>
 			{{^CommentIsNil}}
 				<p class="comment">{{{DerefComment}}}</p>

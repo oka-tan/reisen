@@ -64,16 +64,18 @@ func BoardThread(pg *bun.DB, conf config.Config) func(echo.Context) error {
 		}
 
 		model := map[string]interface{}{
-			"board":        board,
-			"boards":       conf.Boards,
-			"conf":         conf.TemplateConfig,
-			"threadNumber": threadNumber,
-			"op":           thread[0],
-			"thread":       thread[1:],
-			"enableLatex":  conf.IsLatexEnabled(board),
-			"enableTegaki": conf.IsTegakiEnabled(board),
-			"title":        title,
-			"description":  description,
+			"board":              board,
+			"boards":             conf.Boards,
+			"conf":               conf.TemplateConfig,
+			"threadNumber":       threadNumber,
+			"op":                 thread[0],
+			"thread":             thread[1:],
+			"enableLatex":        conf.IsLatexEnabled(board),
+			"enableTegaki":       conf.IsTegakiEnabled(board),
+			"enableCountryFlags": conf.AreCountryFlagsEnabled(board),
+			"enableBoardFlags":   conf.AreBoardFlagsEnabled(board),
+			"title":              title,
+			"description":        description,
 		}
 
 		return c.Render(http.StatusOK, "board-thread", model)
