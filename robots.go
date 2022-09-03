@@ -21,6 +21,7 @@ func robots(conf config.Config) {
 		fmt.Fprintf(&b, "Disallow: /%s/view-same\n", name)
 		fmt.Fprintf(&b, "Disallow: /%s/post\n", name)
 		fmt.Fprintf(&b, "Disallow: /%s?rkeyset=\n", name)
+		fmt.Fprintf(&b, "Disallow: /%s/report", name)
 	}
 
 	robotsTxt, err := os.Create("static/robots.txt")

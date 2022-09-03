@@ -73,6 +73,9 @@ func main() {
 	e.GET("/:board/view-same/:media_4chan_hash", handlers.BoardViewSame(pg, conf))
 	e.GET("/:board/mooch-image/:post_number", handlers.MoochImage(pg, conf))
 
+	e.GET("/:board/report/:post_number", handlers.ReportGET(pg, conf))
+	e.POST("/:board/report/:post_number", handlers.ReportPOST(pg, conf))
+
 	e.Logger.Fatal(e.Start(fmt.Sprintf(":%d", conf.Port)))
 }
 

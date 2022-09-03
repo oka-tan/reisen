@@ -113,6 +113,20 @@ window.addEventListener('load', function(event) {
 				}
 			}
 		}
+
+		//Add in report button
+		const postNameP = reisenPost.getElementsByClassName("post-name-p")[0];
+		
+		const reportButton = document.createElement("span");
+		reportButton.textContent = "Report";
+		reportButton.classList.add("report-button");
+		reportButton.onclick = function(board, postNumber) {
+			return function() {
+				window.open(`/${board}/report/${postNumber}`, "_blank", "popup,width=400,height=310");
+			}
+		}(board, postNumber);
+
+		postNameP.appendChild(reportButton);
 	}
 
 	//Hide the exif tables by default

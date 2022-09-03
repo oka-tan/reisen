@@ -188,8 +188,28 @@ select {
 
 #content {
 	width: 100%;
-	padding: 1rem;
+	padding: 0.5rem;
 	flex-grow: 1;
+}
+
+#report-form {
+	width: 100%;
+	padding: 1rem;
+}
+
+#report-form>*{
+	display: block;
+	margin-bottom: 1rem;
+	margin-top: 0rem;
+	width: 100%;
+}
+
+#report-form>label {
+	margin-bottom: 0rem;
+}
+
+#report-form>*:last-child {
+	margin-bottom: 0rem;
 }
 
 /*
@@ -215,7 +235,7 @@ select {
 	gap: 1.25rem;
 	margin-bottom: 1rem;
 	flex-direction: column;
-	padding: 1rem;
+	padding: 0.5rem;
 }
 
 .reisen-post:target {
@@ -297,6 +317,20 @@ select {
 	color: var(--greentext-color);
 }
 
+.report-button {
+	color: var(--link-color);
+	cursor: pointer;
+	border-width: 1px;
+	border-style: solid;
+	border-color: var(--link-color);
+	padding: 0.15rem;
+}
+
+.report-button:hover {
+	color: var(--link-hover-color);
+	border-color: var(--link-hover-color);
+}
+
 span.deadlink {
 	text-decoration: line-through;
 	color: var(--deadlink-color);
@@ -332,6 +366,7 @@ span.deadlink {
 	.reisen-post {
 		flex-direction: row;
 		display: inline-flex;
+		padding: 1rem;
 	}
 
 	.reisen-post-op, .reisen-thread {
