@@ -34,6 +34,7 @@ func ReportPOST(pg *bun.DB, conf config.Config) func(echo.Context) error {
 			Model(&db.Report{}).
 			Where("user_ip = ?", c.RealIP()).
 			Where("created_at > ?", time.Now().Add(-time.Hour)).
+			Where("NOT handled").
 			Count(context.Background())
 
 		if count >= 5 {
