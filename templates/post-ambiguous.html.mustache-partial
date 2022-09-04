@@ -80,6 +80,9 @@
 					{{/Deleted}}
 				{{/Op}}
 				<strong class="post-name">{{FormatName}}</strong>
+				{{#HasID}}
+					<span class="poster-id" style="{{IDStyle}}">ID: {{DerefPosterID}}</span>
+				{{/HasID}}
 				at {{FormatTime}}
 				<a href="/{{board}}/thread/{{ThreadNumber}}#p{{PostNumber}}">
 					No. {{PostNumber}}

@@ -72,6 +72,9 @@
 		</h2>
 		<p class="post-name-p">
 			<strong class="post-name">{{FormatName}}</strong>
+			{{#HasID}}
+				<span class="poster-id" style="{{IDStyle}}">ID: {{DerefPosterID}}</span>
+			{{/HasID}}
 			at {{FormatTime}}
 			<a href="/{{board}}/thread/{{PostNumber}}">
 				No. {{PostNumber}}

@@ -326,6 +326,10 @@ select {
 	border-color: var(--link-hover-color);
 }
 
+.poster-id {
+	padding: 0.15rem;
+	border-radius: 0.4rem;
+}
 
 span.deadlink {
 	text-decoration: line-through;
