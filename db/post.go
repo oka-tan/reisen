@@ -268,10 +268,12 @@ func (p *Post) IDStyle() string {
 	green := (hash >> 16) & 0xFF
 	blue := (hash >> 8) & 0xFF
 
-	black := float64(red)*0.299+float64(green)*0.587+float64(blue)*0.114 > 125
-
 	result := fmt.Sprintf("background-color: rgb(%d, %d, %d);", red, green, blue)
-	if black {
+
+	//Determines how light the color just computed is
+	light := float64(red)*0.299+float64(green)*0.587+float64(blue)*0.114 > 125
+
+	if light {
 		result += "color: black;"
 	} else {
 		result += "color: white;"
