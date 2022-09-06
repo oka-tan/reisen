@@ -143,7 +143,7 @@ window.addEventListener('load', function(event) {
 		hour12: false,
 		minute: 'numeric',
 		second: 'numeric',
-		timeZoneName: 'shortGeneric'
+		timeZoneName: 'shortOffset'
 	});
 	for (const postDate of document.getElementsByClassName("post-date")) {
 		const d = new Date(postDate.getAttribute("data-json-time"));
