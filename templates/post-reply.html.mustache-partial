@@ -68,6 +68,9 @@
 					<span title="Deleted">🗑️</span>
 				{{/Deleted}}
 				<strong class="post-name">{{FormatName}}</strong>
+				{{#HasTripcode}}
+					<span class="post-tripcode">{{DerefTripcode}}</span>
+				{{/HasTripcode}}
 				{{#HasID}}
 					<span class="poster-id" style="{{IDStyle}}">ID: {{DerefPosterID}}</span>
 				{{/HasID}}

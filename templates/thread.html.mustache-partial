@@ -66,12 +66,18 @@
 			{{#Deleted}}
 				<span title="Deleted">🗑️</span>
 			{{/Deleted}}
+			{{#DerefSticky}}
+				📌
+			{{/DerefSticky}}
 			🧵
 			{{#SubjectIsNil}} Untitled Thread {{/SubjectIsNil}}
 			{{^SubjectIsNil}} {{{DerefSubject}}} {{/SubjectIsNil}}
 		</h2>
 		<p class="post-name-p">
 			<strong class="post-name">{{FormatName}}</strong>
+			{{#HasTripcode}}
+				<span class="post-tripcode">{{DerefTripcode}}</span>
+			{{/HasTripcode}}
 			{{#HasID}}
 				<span class="poster-id" style="{{IDStyle}}">ID: {{DerefPosterID}}</span>
 			{{/HasID}}

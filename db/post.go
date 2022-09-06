@@ -287,3 +287,20 @@ func (p *Post) IDStyle() string {
 
 	return result
 }
+
+//DerefSticky returns a boolean indicating whether a post is an OP or not
+func (p *Post) DerefSticky() bool {
+	return *p.Sticky
+}
+
+//HasTripcode returns a boolean indicating
+//whether or not the post has a not-null
+//tripcode
+func (p *Post) HasTripcode() bool {
+	return p.Tripcode != nil
+}
+
+//DerefTricode derefs the tripcode field
+func (p *Post) DerefTripcode() string {
+	return *p.Tripcode
+}
