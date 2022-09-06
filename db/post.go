@@ -73,7 +73,13 @@ func (p *Post) FormatName() string {
 //FormatTime formats the post time
 //as a string
 func (p *Post) FormatTime() string {
-	return p.TimePosted.UTC().Format("Mon 2 Jan 2006 15:04:05")
+	return p.TimePosted.UTC().Format("Mon, 2 Jan 2006 15:04:05 MST")
+}
+
+//JsonTime returns the post time
+//in the default JSON format
+func (p *Post) JsonTime() string {
+	return p.TimePosted.UTC().Format(time.RFC3339)
 }
 
 //SubjectIsNil returns a boolean indicating

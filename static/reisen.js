@@ -134,6 +134,22 @@ window.addEventListener('load', function(event) {
 		exifTable.classList.add("hidden");
 	}
 
+	const dateTimeFormat = new Intl.DateTimeFormat("en-GB", {
+		year: 'numeric',
+		month: 'short',
+		day: 'numeric',
+		weekday: 'short',
+		hour: 'numeric',
+		hour12: false,
+		minute: 'numeric',
+		second: 'numeric',
+		timeZoneName: 'shortGeneric'
+	});
+	for (const postDate of document.getElementsByClassName("post-date")) {
+		const d = new Date(postDate.getAttribute("data-json-time"));
+		postDate.textContent = ` at ${dateTimeFormat.format(d)} `;
+	}
+
 	//Mark the correct theme in the select as selected
 	if (window.localStorage.getItem('themeName') !== null) {
 		const themeName = window.localStorage.getItem('themeName');

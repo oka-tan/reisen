@@ -1,18 +1,15 @@
 # Reisen
 
-4chan archive Koiwai-compatible frontend
+4chan Archive Koiwai-compatible frontend
 
 ## Features
-- Not foolfuuka
-- Looks better (thanks Tibix)
-- Multiple default themes
-- Tegaki support (unprecedented)
-- Minimal JS
-- Simple, customizable CSS
-- Reasonably fast
-- Reasonably secure
-- Reasonably maintainable
-- Reasonable SEO
+- Support for multiple pure CSS themes
+- Tegaki support
+- Latex support
+- Country flags support
+- Board flags support
+- Colored IDs support
+- EXIF tables support
 
 ## Configuration
 See config.example.toml and follow along with the comments
@@ -25,12 +22,15 @@ Reisen will look for a configuration file
 in that order
 
 ## Deployment
-Reisen needs a postgres user with `SELECT` on the posts table,
-network access to your Lnx instance and just enough filesystem permissions
+Reisen needs a postgres user with `SELECT` on 
+the posts table, `SELECT`, `INSERT` and `UPDATE`
+permissions on the reports table, network access
+to your Lnx instance and just enough filesystem permissions
 to write the robots.txt file at ./static/robots.txt
 
 Strongly consider giving reisen its own user with negligible filesystem permissions,
 preferrably just the robots.txt file
 
-For DMCA reasons, reisen expects to always be run behind a reverse proxy,
-so configuring TLS in it directly will involve a bit of code
+For DMCA reasons, Reisen expects to always be run behind a reverse proxy,
+so configuring TLS in it directly will involve a (tiny) bit of code,
+see the documentation for the echo framework

@@ -71,7 +71,9 @@
 				{{#HasID}}
 					<span class="poster-id" style="{{IDStyle}}">ID: {{DerefPosterID}}</span>
 				{{/HasID}}
-				at {{FormatTime}}
+				<span class="post-date" data-json-time="{{JsonTime}}">
+					at {{FormatTime}}
+				</span>
 				<a href="#p{{PostNumber}}">
 					No. {{PostNumber}}
 				</a>
