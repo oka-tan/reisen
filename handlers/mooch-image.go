@@ -37,7 +37,7 @@ func MoochImage(pg *bun.DB, conf config.Config) func(echo.Context) error {
 			return c.String(http.StatusNotFound, "Post not found")
 		}
 
-		if post.MediaInternalHash == nil {
+		if post.MediaInternalHash == nil || post.Hidden {
 			return c.String(http.StatusNotFound, "Image not available")
 		}
 

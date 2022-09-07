@@ -34,6 +34,7 @@ func BoardPost(pg *bun.DB, conf config.Config) func(echo.Context) error {
 			Model(&post).
 			Where("board = ?", board).
 			Where("post_number = ?", postNumber).
+			Where("NOT hidden").
 			Scan(context.Background())
 
 		if err != nil {

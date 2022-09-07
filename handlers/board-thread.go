@@ -24,6 +24,7 @@ func BoardThread(pg *bun.DB, conf config.Config) func(echo.Context) error {
 			Model(&thread).
 			Where("board = ?", board).
 			Where("thread_number = ?", threadNumber).
+			Where("NOT hidden").
 			Order("post_number ASC").
 			Scan(context.Background())
 
@@ -39,7 +40,11 @@ func BoardThread(pg *bun.DB, conf config.Config) func(echo.Context) error {
 			return c.Render(http.StatusInternalServerError, "board-thread-error", model)
 		}
 
-		if len(thread) == 0 {
+		/*
+		 * The second condition translates to either "the
+		 * OP isn't available in the db" or "the OP is hidden"
+		 */
+		if len(thread) == 0 || !thread[0].Op {
 			model := map[string]interface{}{
 				"board":        board,
 				"boards":       conf.Boards,

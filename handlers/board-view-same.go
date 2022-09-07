@@ -25,7 +25,8 @@ func BoardViewSame(pg *bun.DB, conf config.Config) func(echo.Context) error {
 		q := pg.NewSelect().
 			Model(&posts).
 			Where("media_4chan_hash = ?", media4chanHash).
-			Where("board = ?", board)
+			Where("board = ?", board).
+			Where("NOT hidden")
 
 		keyset, kerr := strconv.ParseInt(c.QueryParam("keyset"), 10, 64)
 		rkeyset, rkerr := strconv.ParseInt(c.QueryParam("rkeyset"), 10, 64)
