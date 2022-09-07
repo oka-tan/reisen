@@ -24,10 +24,10 @@ port = 8000
 
 #boards to be displayed
 [[boards]]
-name = "i"
+name = "po"
 #description shown in the index page
-description = "Oekaki"
-enable_tegaki = true
+description = "Papercraft & Origami"
+enable_tegaki = false
 enable_latex = false
 enable_country_flags = false
 enable_board_flags = false
@@ -35,11 +35,11 @@ enable_board_flags = false
 #configuration directly injected when templating html
 [template]
 #url where images are hosted
-images_url = "http://s3.localhost/ayase"
+images_url = "http://s3.localhost/ayase-media"
 #url where thumbnails are hosted
-thumbnails_url = "http://s3.localhost/ayase"
+thumbnails_url = "http://s3.localhost/ayase-thumbnails"
 #url where tegaki replay files are hosted
-oekaki_url = "http://s3.localhost/ayase"
+oekaki_url = "http://s3.localhost/ayase-oekaki"
 #url with favicon
 favicon_url = "/favicon.ico"
 #url with reisen's main js file

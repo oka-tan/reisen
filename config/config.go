@@ -69,6 +69,8 @@ func LoadConfig() Config {
 		log.Fatalln(err)
 	}
 
+	defer f.Close()
+
 	var conf Config
 
 	if _, err := toml.NewDecoder(f).Decode(&conf); err != nil {
