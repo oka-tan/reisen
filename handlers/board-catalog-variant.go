@@ -45,6 +45,7 @@ func BoardCatalogVariant(pg *bun.DB, conf config.Config) func(echo.Context) erro
 			Scan(context.Background())
 
 		if err != nil {
+			c.Response().Header().Set("Cache-Control", "no-store")
 			return c.Render(http.StatusInternalServerError, "board-error", map[string]interface{}{
 				"boards":  conf.Boards,
 				"conf":    conf.TemplateConfig,
@@ -54,6 +55,8 @@ func BoardCatalogVariant(pg *bun.DB, conf config.Config) func(echo.Context) erro
 		}
 
 		if len(threads) == 0 {
+			c.Response().Header().Set("Cache-Control", "no-store")
+
 			return c.Render(http.StatusNoContent, "board-empty", map[string]interface{}{
 				"boards":  conf.Boards,
 				"conf":    conf.TemplateConfig,
@@ -102,6 +105,9 @@ func BoardCatalogVariant(pg *bun.DB, conf config.Config) func(echo.Context) erro
 			"enableBoardFlags":   conf.AreBoardFlagsEnabled(board),
 			"noIndex":            true,
 		}
+
+		//Should take around this long for responses to be refreshed on the db in the first place
+		c.Response().Header().Set("Cache-Control", "public, max-age=60, immutable")
 
 		return c.Render(http.StatusOK, "board-catalog-variant", model)
 	}

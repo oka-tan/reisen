@@ -59,37 +59,35 @@ func main() {
 		e.Use(trimVaryHeader)
 	}
 
-	e.File("/favicon.ico", "static/favicon.ico", cacheControlHeader(604800))
+	e.File("/favicon.ico", "static/favicon.ico", cacheControlHeader("public, immutable, max-age=604800"))
 	e.File("/robots.txt", "static/robots.txt")
-	e.Group("/static", cacheControlHeader(604800)).Static("/", "static")
+	e.Group("/static", cacheControlHeader("public, immutable, max-age=604800")).Static("/", "static")
 
-	e.GET("/", handlers.Index(pg, conf), cacheControlHeader(60))
-	e.GET("/contact", handlers.Contact(pg, conf), cacheControlHeader(60))
-	e.GET("/search-reference", handlers.SearchReference(pg, conf), cacheControlHeader(60))
+	e.GET("/", handlers.Index(pg, conf), cacheControlHeader("public, immutable, max-age=60"))
+	e.GET("/contact", handlers.Contact(pg, conf), cacheControlHeader("public, immutable, max-age=60"))
+	e.GET("/search-reference", handlers.SearchReference(pg, conf), cacheControlHeader("public, immutable, max-age=60"))
 	e.GET("/:board", handlers.BoardCatalogVariant(pg, conf))
 	e.GET("/:board/thread/:thread_number", handlers.BoardThread(pg, conf))
-	e.GET("/:board/search", handlers.BoardSearch(pg, lnxService, conf))
+	e.GET("/:board/search", handlers.BoardSearch(pg, lnxService, conf), cacheControlHeader("no-store"))
 	e.GET("/:board/post/:post_number", handlers.BoardPost(pg, conf))
-	e.GET("/:board/view-same/:media_4chan_hash", handlers.BoardViewSame(pg, conf))
+	e.GET("/:board/view-same/:media_4chan_hash", handlers.BoardViewSame(pg, conf), cacheControlHeader("no-store"))
 	e.GET("/:board/mooch-image/:post_number", handlers.MoochImage(pg, conf))
 
-	e.GET("/:board/report/:post_number", handlers.ReportGET(pg, conf))
-	e.POST("/:board/report/:post_number", handlers.ReportPOST(pg, conf))
+	e.GET("/:board/report/:post_number", handlers.ReportGET(pg, conf), cacheControlHeader("no-store"))
+	e.POST("/:board/report/:post_number", handlers.ReportPOST(pg, conf), cacheControlHeader("no-store"))
 
 	e.Logger.Fatal(e.Start(fmt.Sprintf(":%d", conf.Port)))
 }
 
-func cacheControlHeader(maxAge int) echo.MiddlewareFunc {
-	cacheHeader := fmt.Sprintf("public, immutable, max-age=%d", maxAge)
-
+func cacheControlHeader(s string) echo.MiddlewareFunc {
 	return func(cacheHeader string) echo.MiddlewareFunc {
 		return func(next echo.HandlerFunc) echo.HandlerFunc {
 			return func(c echo.Context) error {
-				c.Response().Header().Set(echo.HeaderCacheControl, cacheHeader)
+				c.Response().Header().Set(echo.HeaderCacheControl, s)
 				return next(c)
 			}
 		}
-	}(cacheHeader)
+	}(s)
 }
 
 //Rejects requests without the Accept-Encoding header

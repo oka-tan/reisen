@@ -7,6 +7,7 @@ import (
 	"reisen/config"
 	"reisen/db"
 	"strconv"
+	"time"
 
 	"github.com/labstack/echo/v4"
 	"github.com/uptrace/bun"
@@ -29,6 +30,8 @@ func BoardThread(pg *bun.DB, conf config.Config) func(echo.Context) error {
 			Scan(context.Background())
 
 		if err != nil {
+			c.Response().Header().Set("Cache-Control", "no-store")
+
 			model := map[string]interface{}{
 				"board":        board,
 				"boards":       conf.Boards,
@@ -45,6 +48,8 @@ func BoardThread(pg *bun.DB, conf config.Config) func(echo.Context) error {
 		 * OP isn't available in the db" or "the OP is hidden"
 		 */
 		if len(thread) == 0 || !thread[0].Op {
+			c.Response().Header().Set("Cache-Control", "no-store")
+
 			model := map[string]interface{}{
 				"board":        board,
 				"boards":       conf.Boards,
@@ -81,6 +86,15 @@ func BoardThread(pg *bun.DB, conf config.Config) func(echo.Context) error {
 			"enableBoardFlags":   conf.AreBoardFlagsEnabled(board),
 			"title":              title,
 			"description":        description,
+		}
+
+		//360 days
+		if time.Now().Sub(thread[0].LastModified) > 24*8640*time.Hour {
+			//2 weeks
+			c.Response().Header().Set("Cache-Control", "max-age=604800, public, immutable")
+		} else {
+			//10 minutes
+			c.Response().Header().Set("Cache-Control", "max-age=600, public, immutable")
 		}
 
 		return c.Render(http.StatusOK, "board-thread", model)
