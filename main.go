@@ -63,9 +63,9 @@ func main() {
 	e.File("/robots.txt", "static/robots.txt")
 	e.Group("/static", cacheControlHeader("public, immutable, max-age=604800")).Static("/", "static")
 
-	e.GET("/", handlers.Index(pg, conf), cacheControlHeader("public, immutable, max-age=60"))
-	e.GET("/contact", handlers.Contact(pg, conf), cacheControlHeader("public, immutable, max-age=60"))
-	e.GET("/search-reference", handlers.SearchReference(pg, conf), cacheControlHeader("public, immutable, max-age=60"))
+	e.GET("/", handlers.Index(pg, conf), cacheControlHeader("public, immutable, max-age=600"))
+	e.GET("/contact", handlers.Contact(pg, conf), cacheControlHeader("public, immutable, max-age=600"))
+	e.GET("/search-reference", handlers.SearchReference(pg, conf), cacheControlHeader("public, immutable, max-age=600"))
 	e.GET("/:board", handlers.BoardCatalogVariant(pg, conf))
 	e.GET("/:board/thread/:thread_number", handlers.BoardThread(pg, conf))
 	e.GET("/:board/search", handlers.BoardSearch(pg, lnxService, conf), cacheControlHeader("no-store"))

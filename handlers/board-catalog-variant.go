@@ -107,7 +107,7 @@ func BoardCatalogVariant(pg *bun.DB, conf config.Config) func(echo.Context) erro
 		}
 
 		//Should take around this long for responses to be refreshed on the db in the first place
-		c.Response().Header().Set(echo.HeaderCacheControl, "public, max-age=60, immutable")
+		c.Response().Header().Set(echo.HeaderCacheControl, "public, max-age=600, immutable")
 
 		return c.Render(http.StatusOK, "board-catalog-variant", model)
 	}
