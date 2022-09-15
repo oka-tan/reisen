@@ -102,7 +102,8 @@ func BoardCatalogVariant(pg *bun.DB, conf config.Config) func(echo.Context) erro
 			"enableLatex":        conf.IsLatexEnabled(board),
 			"enableTegaki":       conf.IsTegakiEnabled(board),
 			"enableCountryFlags": conf.AreCountryFlagsEnabled(board),
-			"enableBoardFlags":   conf.AreBoardFlagsEnabled(board),
+			"enablePolFlags":     conf.ArePolFlagsEnabled(board),
+			"enableMlpFlags":     conf.AreMlpFlagsEnabled(board),
 			"noIndex":            true,
 		}
 

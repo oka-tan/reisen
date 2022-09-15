@@ -24,7 +24,8 @@ type BoardConfig struct {
 	EnableLatex        bool   `toml:"enable_latex"`
 	EnableTegaki       bool   `toml:"enable_tegaki"`
 	EnableCountryFlags bool   `toml:"enable_country_flags"`
-	EnableBoardFlags   bool   `toml:"enable_board_flags"`
+	EnablePolFlags     bool   `toml:"enable_pol_flags"`
+	EnableMlpFlags     bool   `toml:"enable_mlp_flags"`
 }
 
 type PostgresConfig struct {
@@ -37,18 +38,19 @@ type LnxConfig struct {
 }
 
 type TemplateConfig struct {
-	ImagesUrl       string  `toml:"images_url"`
-	ThumbnailsUrl   string  `toml:"thumbnails_url"`
-	OekakiUrl       string  `toml:"oekaki_url"`
-	FaviconUrl      string  `toml:"favicon_url"`
-	BaseCssUrl      string  `toml:"base_css_url"`
-	JsUrl           string  `toml:"js_url"`
-	TegakiJsUrl     string  `toml:"tegaki_js_url"`
-	TegakiCssUrl    string  `toml:"tegaki_css_url"`
-	FlagsJsUrl      string  `toml:"flags_js_url"`
-	BoardFlagsJsUrl string  `toml:"board_flags_js_url"`
-	Themes          []Theme `toml:"themes"`
-	DefaultTheme    Theme   `toml:"default_theme"`
+	ImagesUrl     string  `toml:"images_url"`
+	ThumbnailsUrl string  `toml:"thumbnails_url"`
+	OekakiUrl     string  `toml:"oekaki_url"`
+	FaviconUrl    string  `toml:"favicon_url"`
+	BaseCssUrl    string  `toml:"base_css_url"`
+	JsUrl         string  `toml:"js_url"`
+	TegakiJsUrl   string  `toml:"tegaki_js_url"`
+	TegakiCssUrl  string  `toml:"tegaki_css_url"`
+	FlagsJsUrl    string  `toml:"flags_js_url"`
+	PolFlagsJsUrl string  `toml:"pol_flags_js_url"`
+	MlpFlagsJsUrl string  `toml:"mlp_flags_js_url"`
+	Themes        []Theme `toml:"themes"`
+	DefaultTheme  Theme   `toml:"default_theme"`
 }
 
 type Theme struct {
@@ -110,10 +112,20 @@ func (c *Config) AreCountryFlagsEnabled(board string) bool {
 	return false
 }
 
-func (c *Config) AreBoardFlagsEnabled(board string) bool {
+func (c *Config) ArePolFlagsEnabled(board string) bool {
 	for _, b := range c.Boards {
 		if b.Name == board {
-			return b.EnableBoardFlags
+			return b.EnablePolFlags
+		}
+	}
+
+	return false
+}
+
+func (c *Config) AreMlpFlagsEnabled(board string) bool {
+	for _, b := range c.Boards {
+		if b.Name == board {
+			return b.EnableMlpFlags
 		}
 	}
 

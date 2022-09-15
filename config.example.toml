@@ -30,7 +30,8 @@ description = "Papercraft & Origami"
 enable_tegaki = false
 enable_latex = false
 enable_country_flags = false
-enable_board_flags = false
+enable_pol_flags = false
+enable_mlp_flags = false
 
 #configuration directly injected when templating html
 [template]
@@ -50,8 +51,10 @@ tegaki_js_url = "/static/tegaki.min.js"
 tegaki_css_url = "/static/tegaki.css"
 #url with the flags js file
 flags_js_url = "/static/flags.js"
-#url with the board-flags js file
-board_flags_js_url = "/static/board-flags.js"
+#url with the pol-flags js file
+pol_flags_js_url = "/static/pol-flags.js"
+#url with the mlp-flags js file
+mlp_flags_js_url = "/static/mlp-flags.js"
 
 #reisen themes
 [[template.themes]]

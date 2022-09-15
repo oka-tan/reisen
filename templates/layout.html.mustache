@@ -45,10 +45,14 @@
 			<link rel="stylesheet" href="/static/flags.css">
 			<script async src="{{conf.FlagsJsUrl}}"></script>
 		{{/enableCountryFlags}}
-		{{#enableBoardFlags}}
-			<link rel="stylesheet" href="/static/board-flags.css">
-			<script async src="{{conf.BoardFlagsJsUrl}}"></script>
-		{{/enableBoardFlags}}
+		{{#enablePolFlags}}
+			<link rel="stylesheet" href="/static/pol-flags.css">
+			<script async src="{{conf.PolFlagsJsUrl}}"></script>
+		{{/enablePolFlags}}
+		{{#enableMlpFlags}}
+			<link rel="stylesheet" href="/static/mlp-flags.css">
+			<script async src="{{conf.MlpFlagsJsUrl}}"></script>
+		{{/enableMlpFlags}}
 		<script src="{{conf.JsUrl}}"></script>
 	</head>
 	<body>

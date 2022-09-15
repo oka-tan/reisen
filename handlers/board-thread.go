@@ -83,7 +83,8 @@ func BoardThread(pg *bun.DB, conf config.Config) func(echo.Context) error {
 			"enableLatex":        conf.IsLatexEnabled(board),
 			"enableTegaki":       conf.IsTegakiEnabled(board),
 			"enableCountryFlags": conf.AreCountryFlagsEnabled(board),
-			"enableBoardFlags":   conf.AreBoardFlagsEnabled(board),
+			"enablePolFlags":     conf.ArePolFlagsEnabled(board),
+			"enableMlpFlags":     conf.AreMlpFlagsEnabled(board),
 			"title":              title,
 			"description":        description,
 		}

@@ -113,7 +113,8 @@ func BoardSearch(pg *bun.DB, lnxService lnx.Service, conf config.Config) func(ec
 			"enableLatex":        conf.IsLatexEnabled(board),
 			"enableTegaki":       conf.IsTegakiEnabled(board),
 			"enableCountryFlags": conf.AreCountryFlagsEnabled(board),
-			"enableBoardFlags":   conf.AreBoardFlagsEnabled(board),
+			"enablePolFlags":     conf.ArePolFlagsEnabled(board),
+			"enableMlpFlags":     conf.AreMlpFlagsEnabled(board),
 		})
 	}
 }
