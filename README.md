@@ -7,9 +7,10 @@
 - Tegaki support
 - Latex support
 - Country flags support
-- Board flags support
+- Board flags support (for both /pol/ and /mlp/)
 - Colored IDs support
 - EXIF tables support
+- ShiftJIS support
 
 ## Configuration
 See config.example.toml and follow along with the comments
