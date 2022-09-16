@@ -32,8 +32,8 @@ function showElementOnMouseOver(elementId) {
 		if (
 			rect.top >= 0 &&
 			rect.left >= 0 &&
-			rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-			rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+			rect.bottom <= document.documentElement.clientHeight &&
+			rect.right <= document.documentElement.clientWidth
 		) {
 			//If it is we just highlight it
 			element.classList.add("force-target");
@@ -47,8 +47,30 @@ function showElementOnMouseOver(elementId) {
 			//Ensure it has a background
 			clone.classList.remove("reisen-post-op");
 			clone.classList.add("reisen-post-reply");
-			clone.style = "position: absolute";
+			clone.style.position = "fixed";
+			clone.style.marginBottom = "0px";
 
+			const aRect = event.target.getBoundingClientRect();
+			//Check if the link is further up or down and then
+			//position accordingly
+			//
+			//inb4 "why are you dividing both sides by 2" because fuck you
+			if (document.documentElement.clientHeight/2 < (aRect.top + aRect.bottom)/2) {
+				clone.style.bottom = (document.documentElement.clientHeight - aRect.top) + "px";
+			} else {
+				clone.style.top = aRect.bottom + "px";
+			}
+
+			//Check if the link is further to the left or the right
+			//and then position it accordingly
+			if (document.documentElement.clientWidth/2 < (aRect.left + aRect.right)/2) {
+				clone.style.right = (document.documentElement.clientWidth - aRect.right) + "px";
+			} else {
+				clone.style.left = aRect.left + "px";
+			}
+
+			//append it to the <a> element so you can move the mouse
+			//over the preview
 			event.target.appendChild(clone);
 		}
 	}
