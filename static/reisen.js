@@ -17,10 +17,11 @@ if (document.documentElement.getAttribute('data-enable-latex') === 'true') {
 	};
 }
 
+//Shows the element with id elementId next to the event target
 function showElementOnMouseOver(elementId) {
 	return function(event) {
 		//Check if we haven't already created the hovering clone element
-		const clone = document.getElementById("quote-preview");
+		const clone = document.getElementById('quote-preview');
 		if (clone) {
 			return;
 		}
@@ -36,38 +37,38 @@ function showElementOnMouseOver(elementId) {
 			rect.right <= document.documentElement.clientWidth
 		) {
 			//If it is we just highlight it
-			element.classList.add("force-target");
+			element.classList.add('force-target');
 		} else {
 			//Otherwise we clone it and position it below the link
 			//This is kind of half assed and I should copy what 4chan does later
 			const clone = element.cloneNode(true);
 
 			//Fix an ID for later removal
-			clone.id = "quote-preview";
+			clone.id = 'quote-preview';
 			//Ensure it has a background
-			clone.classList.remove("reisen-post-op");
-			clone.classList.add("reisen-post-reply");
-			clone.style.position = "fixed";
-			clone.style.marginBottom = "0px";
+			clone.classList.remove('reisen-post-op');
+			clone.classList.add('reisen-post-reply');
+			clone.style.position = 'fixed';
+			clone.style.marginBottom = '0px';
 
 			const aRect = event.target.getBoundingClientRect();
 
 			//Check if the link is further up or down and then
 			//position accordingly
 			//
-			//inb4 "why are you dividing both sides by 2" because fuck you
+			//inb4 'why are you dividing both sides by 2' because fuck you
 			if (document.documentElement.clientHeight/2 < (aRect.top + aRect.bottom)/2) {
-				clone.style.bottom = (document.documentElement.clientHeight - aRect.top) + "px";
+				clone.style.bottom = (document.documentElement.clientHeight - aRect.top) + 'px';
 			} else {
-				clone.style.top = aRect.bottom + "px";
+				clone.style.top = aRect.bottom + 'px';
 			}
 
 			//Check if the link is further to the left or the right
 			//and then position it accordingly
 			if (document.documentElement.clientWidth/2 < (aRect.left + aRect.right)/2) {
-				clone.style.right = (document.documentElement.clientWidth - aRect.right) + "px";
+				clone.style.right = (document.documentElement.clientWidth - aRect.right) + 'px';
 			} else {
-				clone.style.left = aRect.left + "px";
+				clone.style.left = aRect.left + 'px';
 			}
 
 			//append it to the <body> element
@@ -76,19 +77,29 @@ function showElementOnMouseOver(elementId) {
 	}
 }
 
+//Hides the quote-preview
 function hideElementOnMouseExit(elementId) {
 	return function(event) {
 		//Remove the highlight class
 		const element = document.getElementById(elementId);
-		element.classList.remove("force-target");
+		element.classList.remove('force-target');
 
 		//Remove the hovering clone
-		const elementClone = document.getElementById("quote-preview");
+		const elementClone = document.getElementById('quote-preview');
 		if (elementClone) {
 			elementClone.parentElement.removeChild(elementClone);
 		}
 	}
 }
+
+//Ensures the quote-preview vanishes whenever the user scrolls
+document.addEventListener('onscroll', function(event) {
+	const el = document.getElementById('quote-preview');
+
+	if (el) {
+		el.parentNode.removeChild(el);
+	}
+});
 
 //Load event. Most of the code is in here
 window.addEventListener('load', function(event) {
@@ -184,7 +195,7 @@ window.addEventListener('load', function(event) {
 							const element = document.getElementById(toggleId);
 
 							if (element) {
-								element.classList.toggle("hidden");
+								element.classList.toggle('hidden');
 							}
 						}
 					}(toggleId);
@@ -193,14 +204,14 @@ window.addEventListener('load', function(event) {
 		}
 
 		//Add in report button
-		const postNameP = reisenPost.getElementsByClassName("post-name-p")[0];
+		const postNameP = reisenPost.getElementsByClassName('post-name-p')[0];
 		
-		const reportButton = document.createElement("span");
-		reportButton.textContent = "Report";
-		reportButton.classList.add("report-button");
+		const reportButton = document.createElement('span');
+		reportButton.textContent = 'Report';
+		reportButton.classList.add('report-button');
 		reportButton.onclick = function(board, postNumber) {
 			return function() {
-				window.open(`/${board}/report/${postNumber}`, "_blank", "popup,width=400,height=310");
+				window.open(`/${board}/report/${postNumber}`, '_blank', 'popup,width=400,height=310');
 			}
 		}(board, postNumber);
 
@@ -208,11 +219,11 @@ window.addEventListener('load', function(event) {
 	}
 
 	//Hide the exif tables by default
-	for (const exifTable of document.getElementsByClassName("exif")) {
-		exifTable.classList.add("hidden");
+	for (const exifTable of document.getElementsByClassName('exif')) {
+		exifTable.classList.add('hidden');
 	}
 
-	const dateTimeFormat = new Intl.DateTimeFormat("en-GB", {
+	const dateTimeFormat = new Intl.DateTimeFormat('en-GB', {
 		year: 'numeric',
 		month: 'short',
 		day: 'numeric',
@@ -223,8 +234,8 @@ window.addEventListener('load', function(event) {
 		second: 'numeric',
 		timeZoneName: 'shortOffset'
 	});
-	for (const postDate of document.getElementsByClassName("post-date")) {
-		const d = new Date(postDate.getAttribute("data-json-time"));
+	for (const postDate of document.getElementsByClassName('post-date')) {
+		const d = new Date(postDate.getAttribute('data-json-time'));
 		postDate.textContent = ` at ${dateTimeFormat.format(d)} `;
 	}
 
