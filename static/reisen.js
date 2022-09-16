@@ -93,7 +93,7 @@ function hideElementOnMouseExit(elementId) {
 }
 
 //Ensures the quote-preview vanishes whenever the user scrolls
-document.addEventListener('onscroll', function(event) {
+document.addEventListener('scroll', function(event) {
 	const el = document.getElementById('quote-preview');
 
 	if (el) {
