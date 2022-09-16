@@ -216,12 +216,6 @@ select {
 	margin-bottom: 0rem;
 }
 
-#quote-preview {
-	font-size: 1rem;
-	line-height: 1.5rem;
-	color: var(--primary-text-color);
-}
-
 /*
  * Classes
  */

@@ -51,6 +51,7 @@ function showElementOnMouseOver(elementId) {
 			clone.style.marginBottom = "0px";
 
 			const aRect = event.target.getBoundingClientRect();
+
 			//Check if the link is further up or down and then
 			//position accordingly
 			//
@@ -69,9 +70,8 @@ function showElementOnMouseOver(elementId) {
 				clone.style.left = aRect.left + "px";
 			}
 
-			//append it to the <a> element so you can move the mouse
-			//over the preview
-			event.target.appendChild(clone);
+			//append it to the <body> element
+			document.body.appendChild(clone);
 		}
 	}
 }
