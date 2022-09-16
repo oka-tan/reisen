@@ -17,6 +17,57 @@ if (document.documentElement.getAttribute('data-enable-latex') === 'true') {
 	};
 }
 
+function showElementOnMouseOver(elementId) {
+	return function(event) {
+		//Check if we haven't already created the hovering clone element
+		const clone = document.getElementById("quote-preview");
+		if (clone) {
+			return;
+		}
+
+		const element = document.getElementById(elementId);
+		const rect = element.getBoundingClientRect();
+
+		//Check if the element is on the viewport
+		if (
+			rect.top >= 0 &&
+			rect.left >= 0 &&
+			rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+			rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+		) {
+			//If it is we just highlight it
+			element.classList.add("force-target");
+		} else {
+			//Otherwise we clone it and position it below the link
+			//This is kind of half assed and I should copy what 4chan does later
+			const clone = element.cloneNode(true);
+
+			//Fix an ID for later removal
+			clone.id = "quote-preview";
+			//Ensure it has a background
+			clone.classList.remove("reisen-post-op");
+			clone.classList.add("reisen-post-reply");
+			clone.style = "position: absolute";
+
+			event.target.appendChild(clone);
+		}
+	}
+}
+
+function hideElementOnMouseExit(elementId) {
+	return function(event) {
+		//Remove the highlight class
+		const element = document.getElementById(elementId);
+		element.classList.remove("force-target");
+
+		//Remove the hovering clone
+		const elementClone = document.getElementById("quote-preview");
+		if (elementClone) {
+			elementClone.parentElement.removeChild(elementClone);
+		}
+	}
+}
+
 //Load event. Most of the code is in here
 window.addEventListener('load', function(event) {
 	//Global variables
@@ -55,11 +106,16 @@ window.addEventListener('load', function(event) {
 					if (quoteLinksHolder) {
 						//Ensure the link is correct.
 						aElement.href = '#p' + postNumberReferenced;
+						aElement.onmouseover = showElementOnMouseOver('p' + postNumberReferenced);
+						aElement.onmouseleave = hideElementOnMouseExit('p' + postNumberReferenced);
 
+						//Inject quotelink
 						const quoteLink = document.createElement('a');
 
 						quoteLink.textContent = '>>' + postNumber;
 						quoteLink.href = '#' + reisenPost.id;
+						quoteLink.onmouseover = showElementOnMouseOver(reisenPost.id);
+						quoteLink.onmouseleave = hideElementOnMouseExit(reisenPost.id);
 						quoteLink.classList.add('reisen-backlink');
 
 						quoteLinksHolder.appendChild(quoteLink);
