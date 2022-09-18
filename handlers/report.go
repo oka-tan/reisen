@@ -76,7 +76,7 @@ func ReportPOST(pg *bun.DB, conf config.Config) func(echo.Context) error {
 
 		var post db.Post
 		err = tx.NewSelect().
-			For("NO UPDATE").
+			For("NO KEY UPDATE").
 			Model(&post).
 			Where("board = ?", board).
 			Where("post_number = ?", postNumber).
