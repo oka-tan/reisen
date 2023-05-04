@@ -99,7 +99,7 @@ func BoardViewSame(pg *bun.DB, conf config.Config) func(echo.Context) error {
 			"enableCountryFlags": conf.AreCountryFlagsEnabled(board),
 			"enablePolFlags":     conf.ArePolFlagsEnabled(board),
 			"enableMlpFlags":     conf.AreMlpFlagsEnabled(board),
-			"media4chanHash":     media4chanHash,
+			"media4chanHash":     media4chanHashString,
 		}
 
 		return c.Render(http.StatusOK, "board-view-same", model)
