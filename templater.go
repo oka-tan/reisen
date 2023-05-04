@@ -101,12 +101,8 @@ func newTemplater() *templater {
 			template: mustCompile("templates/board-view-same-empty.html.mustache", fileProvider),
 			layout:   layout,
 		},
-		"contact": {
-			template: mustCompile("templates/contact.html.mustache", fileProvider),
-			layout:   layout,
-		},
-		"search-reference": {
-			template: mustCompile("templates/search-reference.html.mustache", fileProvider),
+		"about": {
+			template: mustCompile("templates/about.html.mustache", fileProvider),
 			layout:   layout,
 		},
 
@@ -126,7 +122,7 @@ func newTemplater() *templater {
 	}
 }
 
-//Render implements a method echo needs for template rendering.
+// Render implements a method echo needs for template rendering.
 func (t *templater) Render(w io.Writer, name string, data interface{}, c echo.Context) error {
 	templateAndLayout := t.templates[name]
 

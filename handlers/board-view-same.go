@@ -12,8 +12,8 @@ import (
 	"github.com/uptrace/bun"
 )
 
-//BoardViewSame handles requests at the /:board/view-same/:hash endpoint
-//and lists out paginated posts with the given hash.
+// BoardViewSame handles requests at the /:board/view-same/:hash endpoint
+// and lists out paginated posts with the given hash.
 func BoardViewSame(pg *bun.DB, conf config.Config) func(echo.Context) error {
 	return func(c echo.Context) error {
 		board := c.Param("board")
@@ -96,6 +96,7 @@ func BoardViewSame(pg *bun.DB, conf config.Config) func(echo.Context) error {
 			"enableCountryFlags": conf.AreCountryFlagsEnabled(board),
 			"enablePolFlags":     conf.ArePolFlagsEnabled(board),
 			"enableMlpFlags":     conf.AreMlpFlagsEnabled(board),
+			"media4chanHash":     media4chanHash,
 		}
 
 		return c.Render(http.StatusOK, "board-view-same", model)

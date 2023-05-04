@@ -64,8 +64,7 @@ func main() {
 	e.Group("/static", cacheControlHeader("public, immutable, max-age=604800")).Static("/", "static")
 
 	e.GET("/", handlers.Index(pg, conf), cacheControlHeader("public, immutable, max-age=600"))
-	e.GET("/contact", handlers.Contact(pg, conf), cacheControlHeader("public, immutable, max-age=600"))
-	e.GET("/search-reference", handlers.SearchReference(pg, conf), cacheControlHeader("public, immutable, max-age=600"))
+	e.GET("/about", handlers.About(pg, conf), cacheControlHeader("public, immutable, max-age=600"))
 	e.GET("/:board", handlers.BoardCatalogVariant(pg, conf))
 	e.GET("/:board/thread/:thread_number", handlers.BoardThread(pg, conf))
 	e.GET("/:board/search", handlers.BoardSearch(pg, lnxService, conf), cacheControlHeader("no-store"))
@@ -90,8 +89,8 @@ func cacheControlHeader(s string) echo.MiddlewareFunc {
 	}(s)
 }
 
-//Rejects requests without the Accept-Encoding header
-//explicitly saying it accepts GZIP
+// Rejects requests without the Accept-Encoding header
+// explicitly saying it accepts GZIP
 func forceGzip(next echo.HandlerFunc) echo.HandlerFunc {
 	return func(c echo.Context) error {
 		if !strings.Contains(c.Request().Header.Get(echo.HeaderAcceptEncoding), "gzip") {
@@ -102,7 +101,7 @@ func forceGzip(next echo.HandlerFunc) echo.HandlerFunc {
 	}
 }
 
-//Removes the 'Vary' header from responses
+// Removes the 'Vary' header from responses
 func trimVaryHeader(next echo.HandlerFunc) echo.HandlerFunc {
 	return func(c echo.Context) error {
 		c.Response().Header().Del(echo.HeaderVary)
