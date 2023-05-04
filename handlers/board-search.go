@@ -15,7 +15,7 @@ import (
 	"github.com/uptrace/bun"
 )
 
-//BoardSearch is the regular search endpoint
+// BoardSearch is the regular search endpoint
 func BoardSearch(pg *bun.DB, lnxService lnx.Service, conf config.Config) func(echo.Context) error {
 	return func(c echo.Context) error {
 		board := c.Param("board")
@@ -110,6 +110,7 @@ func BoardSearch(pg *bun.DB, lnxService lnx.Service, conf config.Config) func(ec
 			"offset":             offset,
 			"nextPageOffset":     nextPageOffset,
 			"previousPageOffset": previousPageOffset,
+			"title":              fmt.Sprintf("Search \"%s\"", search),
 			"enableLatex":        conf.IsLatexEnabled(board),
 			"enableTegaki":       conf.IsTegakiEnabled(board),
 			"enableCountryFlags": conf.AreCountryFlagsEnabled(board),

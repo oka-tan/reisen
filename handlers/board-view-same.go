@@ -46,6 +46,7 @@ func BoardViewSame(pg *bun.DB, conf config.Config) func(echo.Context) error {
 				"boards": conf.Boards,
 				"conf":   conf.TemplateConfig,
 				"board":  board,
+				"title":  "Error",
 			})
 		}
 
@@ -54,6 +55,7 @@ func BoardViewSame(pg *bun.DB, conf config.Config) func(echo.Context) error {
 				"boards": conf.Boards,
 				"conf":   conf.TemplateConfig,
 				"board":  board,
+				"title":  "Error",
 			})
 		}
 
@@ -91,6 +93,7 @@ func BoardViewSame(pg *bun.DB, conf config.Config) func(echo.Context) error {
 			"posts":              posts,
 			"keyset":             keyset,
 			"rkeyset":            rkeyset,
+			"title":              "View Same",
 			"enableLatex":        conf.IsLatexEnabled(board),
 			"enableTegaki":       conf.IsTegakiEnabled(board),
 			"enableCountryFlags": conf.AreCountryFlagsEnabled(board),

@@ -8,10 +8,11 @@ import (
 	"github.com/uptrace/bun"
 )
 
-//Index is the request handler at /
+// Index is the request handler at /
 func Index(pg *bun.DB, conf config.Config) func(echo.Context) error {
 	return func(c echo.Context) error {
 		model := map[string]interface{}{
+			"title":  "Eientei",
 			"boards": conf.Boards,
 			"conf":   conf.TemplateConfig,
 		}

@@ -13,7 +13,7 @@ import (
 	"github.com/uptrace/bun"
 )
 
-//BoardThread prints out a thread
+// BoardThread prints out a thread
 func BoardThread(pg *bun.DB, conf config.Config) func(echo.Context) error {
 	return func(c echo.Context) error {
 		board := c.Param("board")
@@ -56,6 +56,7 @@ func BoardThread(pg *bun.DB, conf config.Config) func(echo.Context) error {
 				"conf":         conf.TemplateConfig,
 				"threadNumber": threadNumber,
 				"noIndex":      true,
+				"title":        "Thread Not Found",
 			}
 
 			return c.Render(http.StatusNotFound, "board-thread-not-found", model)
@@ -66,7 +67,7 @@ func BoardThread(pg *bun.DB, conf config.Config) func(echo.Context) error {
 		if thread[0].Subject != nil {
 			subject := *thread[0].Subject
 
-			title = fmt.Sprintf("%d - %s", threadNumber, subject)
+			title = subject
 			description = fmt.Sprintf("/%s/ %d - %s", board, threadNumber, subject)
 		} else {
 			title = fmt.Sprintf("%d - Untitled Thread", threadNumber)
