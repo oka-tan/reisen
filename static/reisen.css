@@ -2,7 +2,7 @@
  * CSS Variables
  */
 
-:root {
+:root[data-theme="Reisen Default Theme"] {
 	--link-color: #8b5cf6;
 	--link-hover-color: #7c3aed;
 	--muted-link-color: #c4b5fd;
@@ -14,6 +14,37 @@
 	--nav-bg-color: #0c0c0e;
 	--deadlink-color: red;
 	--button-text-color: #e2e8f0;
+}
+
+:root[data-theme="Reisen RBT Theme"] {
+	--link-color: #81a2be;
+	--link-hover-color: #5f89ac;
+	--muted-link-color: #cddae5;
+	--greentext-color: #b5bd68;
+	--primary-color: #eeeeee;
+	--primary-text-color: #c5c8c6;
+	--post-bg-color: #282a2e;
+	--main-bg-color: #1d1f21;
+	--nav-bg-color: #000000;
+	--deadlink-color: red;
+	--button-text-color: black;
+	--thread-subject-color: #b294bb;
+	--button-color: #eeeeee;
+	--muted-button-color: #b3b3b3;
+}
+
+:root[data-theme="Reisen Tibix Theme"] {
+	--link-color: #86efac;
+	--link-hover-color: #4ade80;
+	--muted-link-color: #bbf7d0;
+	--greentext-color: #4ade80;
+	--primary-color: #22c55e;
+	--primary-text-color: #e2e8f0;
+	--post-bg-color: #374151;
+	--main-bg-color: #1F2937;
+	--nav-bg-color: #15803d;
+	--deadlink-color: red;
+	--button-text-color: #1f2937;
 }
 
 /*

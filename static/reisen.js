@@ -1,8 +1,7 @@
 //Fix the theme
-const linkElement = document.getElementById('main-css-link');
-if (window.localStorage.getItem('themeUrl') !== null) {
-	const themeUrl = window.localStorage.getItem('themeUrl');
-	linkElement.href = themeUrl;
+if (window.localStorage.getItem('themeName') !== null) {
+	const theme = window.localStorage.getItem('themeName');
+	document.documentElement.setAttribute('data-theme', theme);
 }
 
 //MathJax configuration
@@ -247,9 +246,9 @@ window.addEventListener('load', function(event) {
 			optionElement.selected = optionElement.textContent == themeName;
 
 			//Patch the href link in case it's been modified
-			if (optionElement.selected && linkElement.href != optionElement.value) {
-				window.localStorage.setItem('themeUrl', optionElement.value);
-				linkElement.href = optionElement.value;
+			if (optionElement.selected) {
+				window.localStorage.setItem('themeName', optionElement.textContent);
+				document.documentElement.setAttribute('data-theme', optionElement.textContent);
 			}
 		}
 	}
@@ -257,9 +256,8 @@ window.addEventListener('load', function(event) {
 	themeSelect.onchange = function(event) {
 		for (const optionElement of themeSelect.getElementsByTagName('option')) {
 			if (optionElement.selected) {
-				window.localStorage.setItem('themeUrl', optionElement.value);
 				window.localStorage.setItem('themeName', optionElement.textContent);
-				linkElement.href = optionElement.value;
+				document.documentElement.setAttribute('data-theme', optionElement.textContent);
 
 				break;
 			}
